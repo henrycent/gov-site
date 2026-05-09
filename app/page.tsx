@@ -131,10 +131,21 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
-  const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-    setMenuOpen(false);
-  };
+  useEffect(() => {
+    const targets = { ev: 358, states: 36, margin: 8, donations: 142 };
+    const dur = 1800;
+    const start = performance.now();
+    const tick = (t: number) => {
+      const p = Math.min(1, (t - start) / dur);
+      const e = 1 - Math.pow(1 - p, 3);
+      setEvCount(Math.round(targets.ev * e));
+      setStatesCount(Math.round(targets.states * e));
+      setMarginCount(Math.round(targets.margin * e));
+      setDonationCount(Math.round(targets.donations * e));
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }, []);
 
   const NAV_ITEMS = [["about","About"],["platform","Platform"],["strategy","Strategy"],["administration","Our Plan"],["meet-the-team","Team"],["volunteer","Volunteer"]];
 
@@ -535,7 +546,40 @@ export default function Home() {
                 onMouseLeave={e => (e.currentTarget.style.background = RED)}
               >Sign Me Up</button>
             </div>
-          )}
+            <div
+              style={{
+                position: "relative",
+                background: "rgba(255,255,255,0.04)",
+                border: "1px solid rgba(245,197,24,0.3)",
+                borderRadius: 12,
+                padding: 28,
+              }}
+            >
+              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 12, color: "#fff", fontSize: 12, letterSpacing: 2 }}>
+                <span>SHUMARD</span>
+                <span>HOWELL</span>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  height: 28,
+                  borderRadius: 6,
+                  overflow: "hidden",
+                  border: "2px solid rgba(245,197,24,0.5)",
+                }}
+              >
+                <div style={{ width: "66.5%", background: "linear-gradient(90deg, #7a0f1f, #b22234)" }} />
+                <div style={{ width: "33.5%", background: "linear-gradient(90deg, #1d3893, #0a2463)" }} />
+              </div>
+              <div style={{ display: "flex", justifyContent: "space-between", marginTop: 6, color: "rgba(255,255,255,0.8)", fontSize: 13 }}>
+                <span style={{ color: "#f5c518", fontWeight: 700 }}>358 EV</span>
+                <span>180 EV</span>
+              </div>
+              <div style={{ marginTop: 18, fontSize: 12, color: "rgba(255,255,255,0.55)", lineHeight: 1.6 }}>
+                Projected based on certified results across all 50 states + DC. 270 electoral votes needed to win.
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -545,5 +589,42 @@ export default function Home() {
         <p>Paid for by the Shumard-Centlivre Campaign Committee &middot; Built with pride in America</p>
       </footer>
     </main>
+  );
+}
+
+function Stat({ number, label, suffix }: { number: number; label: string; suffix: string }) {
+  return (
+    <div
+      className="glass"
+      style={{
+        padding: "18px 14px",
+        borderRadius: 10,
+        textAlign: "center",
+      }}
+    >
+      <div
+        style={{
+          fontFamily: "var(--font-playfair), Georgia, serif",
+          fontSize: 38,
+          fontWeight: 900,
+          color: "#f5c518",
+          lineHeight: 1,
+        }}
+      >
+        {number}
+        <span style={{ fontSize: 22 }}>{suffix}</span>
+      </div>
+      <div style={{ fontSize: 10, letterSpacing: 2, color: "rgba(255,255,255,0.65)", textTransform: "uppercase", marginTop: 8 }}>
+        {label}
+      </div>
+    </div>
+  );
+}
+
+function Star({ size, color }: { size: number; color: string }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill={color} aria-hidden>
+      <path d="M12 2l2.39 4.84L20 7.6l-4 3.9.94 5.5L12 14.77 7.06 17l.94-5.5-4-3.9 5.61-.76L12 2z" />
+    </svg>
   );
 }
