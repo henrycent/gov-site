@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import "./globals.css";
+import SiteNav from "@/components/SiteNav";
+import SiteFooter from "@/components/SiteFooter";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -12,9 +14,16 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  weight: ["400", "700", "900"],
+});
+
 export const metadata: Metadata = {
-  title: "Shumard / Centlivre 2028",
-  description: "Made by the Shumard-Centlivre Campaign Committee",
+  title: "Shumard / Centlivre 2028 — A New Vision for America",
+  description:
+    "Official campaign site of Shumard / Centlivre 2028. Strength, integrity, and a future we build together.",
 };
 
 export default function RootLayout({
@@ -25,9 +34,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <SiteNav />
+        <div style={{ flex: 1 }}>{children}</div>
+        <SiteFooter />
+      </body>
     </html>
   );
 }

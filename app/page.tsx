@@ -1,399 +1,459 @@
 "use client";
-import { useState } from "react";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import StarField from "@/components/StarField";
 
 export default function Home() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
-  const [submitted, setSubmitted] = useState(false);
+  const [evCount, setEvCount] = useState(0);
+  const [statesCount, setStatesCount] = useState(0);
+  const [marginCount, setMarginCount] = useState(0);
+  const [donationCount, setDonationCount] = useState(0);
+  const heroRef = useRef<HTMLDivElement | null>(null);
+  const [parallax, setParallax] = useState(0);
 
-  const handleSubmit = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-  };
+  useEffect(() => {
+    const onScroll = () => setParallax(window.scrollY);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
-  const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-    setMenuOpen(false);
-  };
+  useEffect(() => {
+    const targets = { ev: 358, states: 36, margin: 8, donations: 142 };
+    const dur = 1800;
+    const start = performance.now();
+    const tick = (t: number) => {
+      const p = Math.min(1, (t - start) / dur);
+      const e = 1 - Math.pow(1 - p, 3);
+      setEvCount(Math.round(targets.ev * e));
+      setStatesCount(Math.round(targets.states * e));
+      setMarginCount(Math.round(targets.margin * e));
+      setDonationCount(Math.round(targets.donations * e));
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }, []);
 
   return (
-    <main style={{ fontFamily: "'Georgia', serif", background: "#fff", color: "#111" }}>
-
-      {/* NAV */}
-      <nav style={{
-        position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
-        background: "#B22234", borderBottom: "4px solid #3C3B6E",
-        display: "flex", alignItems: "center", justifyContent: "space-between",
-        padding: "0 2rem", height: "64px"
-      }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          <div style={{
-            width: 40, height: 40, background: "#fff", borderRadius: "50%",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            fontWeight: "bold", color: "#B22234", fontSize: "14px"
-          }}>S·C</div>
-          <span style={{ color: "#fff", fontWeight: "bold", fontSize: "18px", letterSpacing: "0.5px" }}>
-            Shumard / Centlivre 2028
-          </span>
-        </div>
-
-        {/* Desktop nav links */}
-        <div style={{ display: "flex", gap: "2rem" }} className="desktop-nav">
-          {["about", "platform", "meet-the-team", "volunteer"].map((id) => (
-            <button key={id} onClick={() => scrollTo(id)} style={{
-              background: "none", border: "none", color: "#fff",
-              fontSize: "15px", cursor: "pointer", fontFamily: "Georgia, serif",
-              textTransform: "capitalize", letterSpacing: "0.5px",
-              padding: "4px 0", borderBottom: "2px solid transparent",
-            }}
-              onMouseEnter={e => (e.currentTarget.style.borderBottom = "2px solid #fff")}
-              onMouseLeave={e => (e.currentTarget.style.borderBottom = "2px solid transparent")}
-            >
-              {id.replace("-", " ")}
-            </button>
-          ))}
-        </div>
-
-        {/* Mobile hamburger */}
-        <button onClick={() => setMenuOpen(!menuOpen)} style={{
-          background: "none", border: "none", color: "#fff", fontSize: "28px",
-          cursor: "pointer", display: "none"
-        }} className="hamburger">☰</button>
-      </nav>
-
-      {/* Mobile menu */}
-      {menuOpen && (
-        <div style={{
-          position: "fixed", top: "64px", left: 0, right: 0, zIndex: 99,
-          background: "#B22234", padding: "1rem 2rem", display: "flex",
-          flexDirection: "column", gap: "1rem"
-        }}>
-          {["about", "platform", "meet-the-team", "volunteer"].map((id) => (
-            <button key={id} onClick={() => scrollTo(id)} style={{
-              background: "none", border: "none", color: "#fff",
-              fontSize: "18px", cursor: "pointer", textAlign: "left",
-              fontFamily: "Georgia, serif", textTransform: "capitalize"
-            }}>{id.replace("-", " ")}</button>
-          ))}
-        </div>
-      )}
-
+    <main style={{ background: "#fbfbfd", color: "#0c1024" }}>
       {/* HERO */}
-      <section style={{
-        minHeight: "100vh", paddingTop: "64px",
-        background: "linear-gradient(160deg, #3C3B6E 0%, #B22234 60%, #8B0000 100%)",
-        display: "flex", flexDirection: "column", alignItems: "center",
-        justifyContent: "center", textAlign: "center", padding: "80px 2rem 60px",
-        position: "relative", overflow: "hidden"
-      }}>
-        {/* Star pattern overlay */}
-        <div style={{
-          position: "absolute", inset: 0, opacity: 0.05,
-          backgroundImage: "radial-gradient(circle, #fff 1px, transparent 1px)",
-          backgroundSize: "40px 40px"
-        }} />
+      <section
+        ref={heroRef}
+        style={{
+          position: "relative",
+          minHeight: "100vh",
+          paddingTop: 76,
+          background:
+            "radial-gradient(ellipse at 80% 0%, #1d3893 0%, transparent 50%), radial-gradient(ellipse at 0% 80%, #b22234 0%, transparent 55%), linear-gradient(160deg, #050d2d 0%, #0a2463 50%, #7a0f1f 100%)",
+          overflow: "hidden",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          textAlign: "center",
+          padding: "120px 1.5rem 80px",
+        }}
+      >
+        <StarField count={120} goldRatio={0.22} />
 
-        <div style={{ position: "relative", zIndex: 1 }}>
-          <p style={{
-            color: "#FFD700", fontSize: "14px", letterSpacing: "4px",
-            textTransform: "uppercase", marginBottom: "1.5rem", fontFamily: "Georgia, serif"
-          }}>A New Vision for America</p>
+        {/* Big floating star */}
+        <div
+          style={{
+            position: "absolute",
+            right: "-40px",
+            top: "15%",
+            opacity: 0.08,
+            transform: `translateY(${parallax * 0.15}px) rotate(${parallax * 0.05}deg)`,
+            pointerEvents: "none",
+          }}
+        >
+          <Star size={260} color="#f5c518" />
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            left: "-30px",
+            bottom: "10%",
+            opacity: 0.06,
+            transform: `translateY(${parallax * -0.1}px) rotate(${parallax * -0.05}deg)`,
+            pointerEvents: "none",
+          }}
+        >
+          <Star size={200} color="#fff" />
+        </div>
 
-          <h1 style={{
-            fontSize: "clamp(48px, 8vw, 96px)", fontWeight: "bold",
-            color: "#fff", lineHeight: 1.05, marginBottom: "0.5rem",
-            textShadow: "0 2px 20px rgba(0,0,0,0.4)"
-          }}>
+        {/* Animated stripes ribbon */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            opacity: 0.04,
+            backgroundImage:
+              "repeating-linear-gradient(0deg, rgba(255,255,255,1) 0 2px, transparent 2px 60px)",
+            pointerEvents: "none",
+          }}
+        />
+
+        <div style={{ position: "relative", zIndex: 2, maxWidth: 1100, margin: "0 auto" }} className="fade-up">
+          <div
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 10,
+              padding: "6px 18px",
+              border: "1px solid rgba(245, 197, 24, 0.5)",
+              borderRadius: 999,
+              fontSize: 11,
+              letterSpacing: 4,
+              color: "#f5c518",
+              textTransform: "uppercase",
+              marginBottom: 24,
+            }}
+          >
+            <span style={{ display: "inline-block", width: 8, height: 8, borderRadius: "50%", background: "#f5c518", animation: "pulse-ring 1.6s infinite" }} />
+            Officially declared · 2028 cycle
+          </div>
+
+          <h1
+            style={{
+              fontFamily: "var(--font-playfair), Georgia, serif",
+              fontSize: "clamp(56px, 11vw, 144px)",
+              fontWeight: 900,
+              color: "#fff",
+              lineHeight: 0.95,
+              letterSpacing: "-2px",
+              margin: 0,
+              textShadow: "0 4px 30px rgba(0,0,0,0.5)",
+            }}
+          >
             SHUMARD
           </h1>
-          <h2 style={{
-            fontSize: "clamp(24px, 4vw, 48px)", fontWeight: "normal",
-            color: "#FFD700", letterSpacing: "6px", marginBottom: "1.5rem"
-          }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 16,
+              margin: "6px 0 14px",
+            }}
+          >
+            <span style={{ height: 1, width: 60, background: "rgba(245,197,24,0.5)" }} />
+            <span
+              className="gold-shine"
+              style={{
+                fontSize: 14,
+                letterSpacing: 6,
+                fontWeight: 700,
+                fontFamily: "var(--font-playfair), Georgia, serif",
+              }}
+            >
+              ★ ★ ★
+            </span>
+            <span style={{ height: 1, width: 60, background: "rgba(245,197,24,0.5)" }} />
+          </div>
+          <h2
+            style={{
+              fontFamily: "var(--font-playfair), Georgia, serif",
+              fontSize: "clamp(28px, 5.5vw, 64px)",
+              fontWeight: 400,
+              color: "#f5c518",
+              letterSpacing: 6,
+              margin: 0,
+            }}
+          >
             CENTLIVRE
           </h2>
-          <p style={{
-            fontSize: "clamp(18px, 2.5vw, 26px)", color: "rgba(255,255,255,0.9)",
-            fontStyle: "italic", maxWidth: "600px", margin: "0 auto 3rem"
-          }}>
-            "Strength, Integrity, and a Future We Build Together"
+
+          <p
+            style={{
+              color: "rgba(255,255,255,0.85)",
+              fontSize: "clamp(17px, 2.2vw, 22px)",
+              fontStyle: "italic",
+              maxWidth: 720,
+              margin: "32px auto 40px",
+              lineHeight: 1.5,
+              fontFamily: "var(--font-playfair), Georgia, serif",
+            }}
+          >
+            “Strength, integrity, and a future we build together.”
           </p>
 
-          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
-            <button onClick={() => scrollTo("volunteer")} style={{
-              background: "#FFD700", color: "#111", border: "none",
-              padding: "16px 40px", fontSize: "17px", fontWeight: "bold",
-              cursor: "pointer", borderRadius: "4px", letterSpacing: "1px",
-              fontFamily: "Georgia, serif", transition: "transform 0.15s"
+          <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
+            <Link href="/volunteer" className="btn-primary">
+              Join the Movement →
+            </Link>
+            <Link href="/platform" className="btn-ghost">
+              Our Platform
+            </Link>
+          </div>
+
+          {/* Live counter strip */}
+          <div
+            style={{
+              marginTop: 64,
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
+              gap: 16,
+              maxWidth: 880,
+              margin: "64px auto 0",
             }}
-              onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.04)")}
-              onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")}
-            >
-              JOIN OUR CAMPAIGN
-            </button>
-            <button onClick={() => scrollTo("platform")} style={{
-              background: "transparent", color: "#fff",
-              border: "2px solid rgba(255,255,255,0.7)",
-              padding: "16px 40px", fontSize: "17px", cursor: "pointer",
-              borderRadius: "4px", letterSpacing: "1px", fontFamily: "Georgia, serif"
-            }}
-              onMouseEnter={e => {
-                e.currentTarget.style.background = "rgba(255,255,255,0.15)";
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.background = "transparent";
-              }}
-            >
-              OUR PLATFORM
-            </button>
+          >
+            <Stat number={evCount} label="Electoral Votes" suffix="" />
+            <Stat number={statesCount} label="States Won" suffix="" />
+            <Stat number={marginCount} label="Popular Vote Margin" suffix="%" />
+            <Stat number={donationCount} label="Counties Flipped" suffix="+" />
           </div>
         </div>
 
         {/* Scroll indicator */}
-        <div style={{
-          position: "absolute", bottom: "2rem", left: "50%", transform: "translateX(-50%)",
-          color: "rgba(255,255,255,0.5)", fontSize: "13px", letterSpacing: "2px",
-          textTransform: "uppercase"
-        }}>
-          ↓ Scroll
+        <div
+          style={{
+            position: "absolute",
+            bottom: 32,
+            left: "50%",
+            transform: "translateX(-50%)",
+            color: "rgba(255,255,255,0.55)",
+            fontSize: 11,
+            letterSpacing: 3,
+            textTransform: "uppercase",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 8,
+            animation: "float 2.6s ease-in-out infinite",
+          }}
+        >
+          Scroll
+          <span style={{ fontSize: 18 }}>↓</span>
         </div>
       </section>
 
-      {/* QUOTE BANNER */}
-      <section style={{
-        background: "#3C3B6E", padding: "2.5rem 2rem", textAlign: "center"
-      }}>
-        <p style={{
-          color: "#fff", fontSize: "clamp(16px, 2.5vw, 22px)",
-          fontStyle: "italic", maxWidth: "800px", margin: "0 auto",
-          lineHeight: 1.6
-        }}>
-          "America's greatest days are not behind us — they are ahead of us, if we are bold enough to reach for them."
-        </p>
-        <p style={{ color: "#FFD700", marginTop: "1rem", letterSpacing: "2px", fontSize: "13px" }}>
-          — CAL SHUMARD
-        </p>
-      </section>
+      {/* STRIPE DIVIDER */}
+      <div className="stripe-divider" />
 
-      {/* ABOUT */}
-      <section id="about" style={{
-        padding: "80px 2rem", maxWidth: "900px", margin: "0 auto"
-      }}>
-        <div style={{ textAlign: "center", marginBottom: "3rem" }}>
-          <p style={{ color: "#B22234", letterSpacing: "3px", fontSize: "13px", textTransform: "uppercase" }}>Our Story</p>
-          <h2 style={{ fontSize: "clamp(28px, 4vw, 48px)", color: "#3C3B6E", marginTop: "0.5rem" }}>
-            Why We're Running
-          </h2>
-          <div style={{ width: "60px", height: "4px", background: "#B22234", margin: "1rem auto 0" }} />
-        </div>
-
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "2rem" }}>
-          <div style={{
-            background: "#f9f9f9", borderLeft: "5px solid #B22234",
-            padding: "2rem", borderRadius: "0 8px 8px 0"
-          }}>
-            <p style={{ fontSize: "15px", lineHeight: 1.8, color: "#333" }}>
-              America stands at a crossroads. Families are struggling, trust in institutions is at a low, and the political establishment has failed to deliver. We believe the American people deserve leaders who work for them — not for special interests or party bosses.
-            </p>
-          </div>
-          <div style={{
-            background: "#f9f9f9", borderLeft: "5px solid #3C3B6E",
-            padding: "2rem", borderRadius: "0 8px 8px 0"
-          }}>
-            <p style={{ fontSize: "15px", lineHeight: 1.8, color: "#333" }}>
-              Cal Shumard and Henry Centlivre are running because they believe in a government that is honest, effective, and accountable. Their campaign is about restoring the promise of America — one family, one community, one state at a time.
-            </p>
+      {/* QUOTE / MISSION */}
+      <section
+        style={{
+          background: "linear-gradient(180deg, #f7f3e8 0%, #fff 100%)",
+          padding: "96px 1.5rem",
+          position: "relative",
+        }}
+      >
+        <div style={{ maxWidth: 980, margin: "0 auto", textAlign: "center" }}>
+          <span style={{ fontSize: 64, color: "#b22234", lineHeight: 0.5, fontFamily: "Georgia, serif" }}>
+            “
+          </span>
+          <p
+            style={{
+              fontFamily: "var(--font-playfair), Georgia, serif",
+              fontSize: "clamp(22px, 3.4vw, 38px)",
+              fontStyle: "italic",
+              color: "#0a2463",
+              lineHeight: 1.45,
+              margin: "0 0 24px",
+            }}
+          >
+            America’s greatest days are not behind us — they are ahead of us, if we are bold enough to reach for them.
+          </p>
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 16 }}>
+            <span style={{ height: 1, width: 40, background: "#b22234" }} />
+            <span style={{ color: "#b22234", fontSize: 12, letterSpacing: 4 }}>CAL SHUMARD</span>
+            <span style={{ height: 1, width: 40, background: "#b22234" }} />
           </div>
         </div>
       </section>
 
-      {/* PLATFORM */}
-      <section id="platform" style={{
-        background: "#f4f4f8", padding: "80px 2rem"
-      }}>
-        <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: "3rem" }}>
-            <p style={{ color: "#B22234", letterSpacing: "3px", fontSize: "13px", textTransform: "uppercase" }}>What We Stand For</p>
-            <h2 style={{ fontSize: "clamp(28px, 4vw, 48px)", color: "#3C3B6E", marginTop: "0.5rem" }}>
-              Our Platform
-            </h2>
-            <div style={{ width: "60px", height: "4px", background: "#B22234", margin: "1rem auto 0" }} />
+      {/* PILLARS */}
+      <section style={{ background: "#fff", padding: "96px 1.5rem" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: 56 }}>
+            <p className="section-eyebrow">Six Pillars</p>
+            <h2 className="section-title serif">A Platform Built for Americans</h2>
+            <div className="section-divider" />
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "1.5rem" }}>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+              gap: 24,
+            }}
+          >
             {[
-              { icon: "🏭", title: "Economy & Jobs", desc: "Cut taxes for working families, bring manufacturing back to American soil, and invest in small business growth." },
-              { icon: "🛡️", title: "National Security", desc: "Rebuild our military, secure our borders, and restore America's standing on the world stage." },
-              { icon: "🏥", title: "Healthcare", desc: "Lower costs through free market competition, protect coverage for pre-existing conditions, and reduce prescription drug prices." },
-              { icon: "⚖️", title: "Rule of Law", desc: "Support law enforcement, appoint constitutionalist judges, and ensure equal justice under law for every American." },
-              { icon: "🎓", title: "Education", desc: "Return control to parents and local communities, expand school choice, and invest in vocational training." },
-              { icon: "⚡", title: "Energy", desc: "Achieve American energy dominance, lower gas prices, and pursue innovation-led environmental solutions." },
-            ].map((item) => (
-              <div key={item.title} style={{
-                background: "#fff", border: "1px solid #e0e0e0",
-                borderRadius: "8px", padding: "2rem",
-                borderTop: "4px solid #B22234",
-                transition: "transform 0.2s, box-shadow 0.2s"
-              }}
-                onMouseEnter={e => {
-                  (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)";
-                  (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 24px rgba(0,0,0,0.1)";
-                }}
-                onMouseLeave={e => {
-                  (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
-                  (e.currentTarget as HTMLElement).style.boxShadow = "none";
-                }}
+              { icon: "🏭", title: "Economy & Jobs", text: "Cut taxes for working families, bring manufacturing home, and unleash small business growth." },
+              { icon: "🛡️", title: "National Security", text: "Rebuild our military, secure the border, and restore America’s standing in the world." },
+              { icon: "🏥", title: "Healthcare", text: "Lower costs through competition, protect coverage, and rein in prescription drug prices." },
+              { icon: "⚖️", title: "Rule of Law", text: "Back the blue, appoint constitutionalist judges, and ensure equal justice for every American." },
+              { icon: "🎓", title: "Education", text: "Hand control back to parents, expand school choice, and invest in vocational training." },
+              { icon: "⚡", title: "Energy", text: "Achieve American energy dominance and pursue innovation-led environmental progress." },
+            ].map((p) => (
+              <Link
+                key={p.title}
+                href="/platform"
+                className="card"
+                style={{ textDecoration: "none", color: "inherit", display: "block" }}
               >
-                <div style={{ fontSize: "36px", marginBottom: "1rem" }}>{item.icon}</div>
-                <h3 style={{ color: "#3C3B6E", fontSize: "20px", marginBottom: "0.75rem" }}>{item.title}</h3>
-                <p style={{ color: "#555", fontSize: "14px", lineHeight: 1.7 }}>{item.desc}</p>
-              </div>
+                <div style={{ fontSize: 36, marginBottom: 14 }}>{p.icon}</div>
+                <h3 style={{ color: "#0a2463", fontSize: 22, margin: "0 0 10px", fontFamily: "var(--font-playfair), Georgia, serif" }}>
+                  {p.title}
+                </h3>
+                <p style={{ color: "#444", fontSize: 14, lineHeight: 1.7, margin: 0 }}>{p.text}</p>
+                <div style={{ marginTop: 16, color: "#b22234", fontSize: 12, letterSpacing: 2, fontWeight: 700 }}>
+                  LEARN MORE →
+                </div>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* MEET THE TEAM */}
-      <section id="meet-the-team" style={{
-        padding: "80px 2rem", maxWidth: "900px", margin: "0 auto", textAlign: "center"
-      }}>
-        <p style={{ color: "#B22234", letterSpacing: "3px", fontSize: "13px", textTransform: "uppercase" }}>The Ticket</p>
-        <h2 style={{ fontSize: "clamp(28px, 4vw, 48px)", color: "#3C3B6E", marginTop: "0.5rem" }}>
-          Meet the Candidates
-        </h2>
-        <div style={{ width: "60px", height: "4px", background: "#B22234", margin: "1rem auto 2.5rem" }} />
-
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "2rem" }}>
-          {[
-            {
-              name: "Cal Shumard",
-              role: "Candidate for President",
-              accent: "#B22234",
-              initials: "CS",
-              bio: "Cal Shumard is a proven leader with a vision for a stronger, more prosperous America. His commitment to conservative values and common-sense governance has earned him the trust of people across the country."
-            },
-            {
-              name: "Henry Centlivre",
-              role: "Candidate for Vice President",
-              accent: "#3C3B6E",
-              initials: "HC",
-              bio: "Henry Centlivre brings a background in finance and a deep commitment to fiscal responsibility. His sharp analytical mind and dedication to service make him the ideal partner to lead this nation forward."
-            }
-          ].map((person) => (
-            <div key={person.name} style={{
-              background: "#fff", border: "1px solid #e0e0e0",
-              borderRadius: "12px", padding: "2.5rem 2rem", textAlign: "center"
-            }}>
-              <div style={{
-                width: "90px", height: "90px", borderRadius: "50%",
-                background: person.accent, color: "#fff",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                fontSize: "28px", fontWeight: "bold", margin: "0 auto 1.5rem",
-                border: "4px solid #FFD700"
-              }}>
-                {person.initials}
-              </div>
-              <h3 style={{ fontSize: "24px", color: "#111", marginBottom: "0.25rem" }}>{person.name}</h3>
-              <p style={{
-                color: person.accent, fontSize: "13px", letterSpacing: "2px",
-                textTransform: "uppercase", marginBottom: "1rem"
-              }}>{person.role}</p>
-              <p style={{ color: "#555", fontSize: "14px", lineHeight: 1.7 }}>{person.bio}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* VOLUNTEER / CONTACT */}
-      <section id="volunteer" style={{
-        background: "#3C3B6E", padding: "80px 2rem"
-      }}>
-        <div style={{ maxWidth: "600px", margin: "0 auto", textAlign: "center" }}>
-          <p style={{ color: "#FFD700", letterSpacing: "3px", fontSize: "13px", textTransform: "uppercase" }}>Get Involved</p>
-          <h2 style={{ fontSize: "clamp(28px, 4vw, 42px)", color: "#fff", marginTop: "0.5rem", marginBottom: "0.5rem" }}>
-            Join the Movement
-          </h2>
-          <p style={{ color: "rgba(255,255,255,0.7)", marginBottom: "2.5rem", fontSize: "15px" }}>
-            Sign up to volunteer, get campaign updates, or show your support.
-          </p>
-
-          {submitted ? (
-            <div style={{
-              background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.3)",
-              borderRadius: "8px", padding: "3rem", color: "#FFD700", fontSize: "20px"
-            }}>
-              🇺🇸 Thank you! We'll be in touch soon.
-            </div>
-          ) : (
-            <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-              <input
-                type="text"
-                placeholder="Your Name"
-                value={formData.name}
-                onChange={e => setFormData({ ...formData, name: e.target.value })}
+      {/* MAP TEASER */}
+      <section
+        style={{
+          background: "linear-gradient(160deg, #050d2d 0%, #0a2463 100%)",
+          padding: "96px 1.5rem",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        <StarField count={50} goldRatio={0.4} />
+        <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative", zIndex: 1 }}>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+              gap: 48,
+              alignItems: "center",
+            }}
+          >
+            <div>
+              <p style={{ color: "#f5c518", letterSpacing: 4, fontSize: 12, fontWeight: 700, margin: 0 }}>
+                A NATIONAL MANDATE
+              </p>
+              <h2
+                className="serif"
                 style={{
-                  padding: "14px 16px", fontSize: "15px", borderRadius: "6px",
-                  border: "1px solid rgba(255,255,255,0.3)", background: "rgba(255,255,255,0.1)",
-                  color: "#fff", fontFamily: "Georgia, serif", outline: "none"
+                  fontSize: "clamp(34px, 5vw, 56px)",
+                  color: "#fff",
+                  margin: "10px 0 18px",
+                  letterSpacing: -1,
+                  lineHeight: 1.05,
                 }}
-              />
-              <input
-                type="email"
-                placeholder="Email Address"
-                value={formData.email}
-                onChange={e => setFormData({ ...formData, email: e.target.value })}
-                style={{
-                  padding: "14px 16px", fontSize: "15px", borderRadius: "6px",
-                  border: "1px solid rgba(255,255,255,0.3)", background: "rgba(255,255,255,0.1)",
-                  color: "#fff", fontFamily: "Georgia, serif", outline: "none"
-                }}
-              />
-              <textarea
-                placeholder="Why do you want to get involved? (optional)"
-                value={formData.message}
-                onChange={e => setFormData({ ...formData, message: e.target.value })}
-                rows={4}
-                style={{
-                  padding: "14px 16px", fontSize: "15px", borderRadius: "6px",
-                  border: "1px solid rgba(255,255,255,0.3)", background: "rgba(255,255,255,0.1)",
-                  color: "#fff", fontFamily: "Georgia, serif", resize: "vertical", outline: "none"
-                }}
-              />
-              <button onClick={handleSubmit} style={{
-                background: "#B22234", color: "#fff", border: "none",
-                padding: "16px", fontSize: "17px", fontWeight: "bold",
-                cursor: "pointer", borderRadius: "6px", letterSpacing: "1px",
-                fontFamily: "Georgia, serif", marginTop: "0.5rem",
-                transition: "background 0.2s"
-              }}
-                onMouseEnter={e => (e.currentTarget.style.background = "#8B0000")}
-                onMouseLeave={e => (e.currentTarget.style.background = "#B22234")}
               >
-                SIGN ME UP
-              </button>
+                The 2028 path to <span style={{ color: "#f5c518" }}>358</span> electoral votes.
+              </h2>
+              <p style={{ color: "rgba(255,255,255,0.8)", fontSize: 16, lineHeight: 1.7, marginBottom: 28 }}>
+                Explore the interactive electoral map showing how Shumard / Centlivre carry every region of the country — from the heartland to the coasts.
+              </p>
+              <Link href="/map" className="btn-primary">Open the Map →</Link>
             </div>
-          )}
+            <div
+              style={{
+                position: "relative",
+                background: "rgba(255,255,255,0.04)",
+                border: "1px solid rgba(245,197,24,0.3)",
+                borderRadius: 12,
+                padding: 28,
+              }}
+            >
+              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 12, color: "#fff", fontSize: 12, letterSpacing: 2 }}>
+                <span>SHUMARD</span>
+                <span>HOWELL</span>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  height: 28,
+                  borderRadius: 6,
+                  overflow: "hidden",
+                  border: "2px solid rgba(245,197,24,0.5)",
+                }}
+              >
+                <div style={{ width: "66.5%", background: "linear-gradient(90deg, #7a0f1f, #b22234)" }} />
+                <div style={{ width: "33.5%", background: "linear-gradient(90deg, #1d3893, #0a2463)" }} />
+              </div>
+              <div style={{ display: "flex", justifyContent: "space-between", marginTop: 6, color: "rgba(255,255,255,0.8)", fontSize: 13 }}>
+                <span style={{ color: "#f5c518", fontWeight: 700 }}>358 EV</span>
+                <span>180 EV</span>
+              </div>
+              <div style={{ marginTop: 18, fontSize: 12, color: "rgba(255,255,255,0.55)", lineHeight: 1.6 }}>
+                Projected based on certified results across all 50 states + DC. 270 electoral votes needed to win.
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer style={{
-        background: "#111", color: "rgba(255,255,255,0.5)",
-        textAlign: "center", padding: "2rem",
-        fontSize: "13px", letterSpacing: "1px"
-      }}>
-        <p style={{ color: "#FFD700", fontWeight: "bold", marginBottom: "0.5rem" }}>
-          SHUMARD / CENTLIVRE 2028
-        </p>
-        <p>Paid for by the Shumard-Centlivre Campaign Committee · Built with pride in America</p>
-      </footer>
-
-      <style>{`
-        @media (max-width: 640px) {
-          .desktop-nav { display: none !important; }
-          .hamburger { display: block !important; }
-        }
-      `}</style>
+      {/* CTA */}
+      <section
+        style={{
+          padding: "96px 1.5rem",
+          background:
+            "linear-gradient(135deg, #b22234 0%, #7a0f1f 100%)",
+          color: "#fff",
+          textAlign: "center",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.18) 1.5px, transparent 2px)",
+            backgroundSize: "32px 32px",
+            opacity: 0.18,
+          }}
+        />
+        <div style={{ position: "relative", maxWidth: 720, margin: "0 auto" }}>
+          <h2 className="serif" style={{ fontSize: "clamp(34px, 5vw, 54px)", margin: 0, letterSpacing: -1 }}>
+            Be part of history.
+          </h2>
+          <p style={{ fontSize: 17, marginTop: 14, color: "rgba(255,255,255,0.85)", lineHeight: 1.6 }}>
+            Volunteer, donate, or just say hello. Every voice matters in this campaign.
+          </p>
+          <div style={{ marginTop: 32, display: "flex", justifyContent: "center", gap: 14, flexWrap: "wrap" }}>
+            <Link href="/volunteer" className="btn-primary">Sign Me Up</Link>
+            <Link href="/team" className="btn-ghost">Meet the Ticket</Link>
+          </div>
+        </div>
+      </section>
     </main>
+  );
+}
+
+function Stat({ number, label, suffix }: { number: number; label: string; suffix: string }) {
+  return (
+    <div
+      className="glass"
+      style={{
+        padding: "18px 14px",
+        borderRadius: 10,
+        textAlign: "center",
+      }}
+    >
+      <div
+        style={{
+          fontFamily: "var(--font-playfair), Georgia, serif",
+          fontSize: 38,
+          fontWeight: 900,
+          color: "#f5c518",
+          lineHeight: 1,
+        }}
+      >
+        {number}
+        <span style={{ fontSize: 22 }}>{suffix}</span>
+      </div>
+      <div style={{ fontSize: 10, letterSpacing: 2, color: "rgba(255,255,255,0.65)", textTransform: "uppercase", marginTop: 8 }}>
+        {label}
+      </div>
+    </div>
+  );
+}
+
+function Star({ size, color }: { size: number; color: string }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill={color} aria-hidden>
+      <path d="M12 2l2.39 4.84L20 7.6l-4 3.9.94 5.5L12 14.77 7.06 17l.94-5.5-4-3.9 5.61-.76L12 2z" />
+    </svg>
   );
 }
