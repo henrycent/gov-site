@@ -222,14 +222,14 @@ export default function GeoMap() {
                   <div style={{ marginBottom: 16 }}>
                     <div style={{ fontSize: 10, letterSpacing: 2, opacity: 0.65, marginBottom: 8 }}>VOTE SHARE (ESTIMATED)</div>
                     {[{ label: "Shumard", pct: sPct, gradient: "linear-gradient(90deg,#7a0f1f,#e63946)" },
-                      { label: "Howell",  pct: hPct, gradient: "linear-gradient(90deg,#050d2d,#1d3893)" }
+                      { label: "Howell",  pct: hPct, gradient: "linear-gradient(90deg,#1a56db,#60a5fa)" }
                     ].map(({ label, pct, gradient }) => (
                       <div key={label} style={{ marginBottom: 8 }}>
                         <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, marginBottom: 3 }}>
                           <span style={{ opacity: 0.85 }}>{label}</span>
                           <span style={{ fontWeight: 700 }}>{pct}%</span>
                         </div>
-                        <div style={{ height: 6, borderRadius: 3, background: "#fff" }}>
+                        <div style={{ height: 6, borderRadius: 3, background: "#fff", border: "1px solid rgba(255,255,255,0.45)" }}>
                           <div style={{ height: "100%", width: `${pct}%`, background: gradient, borderRadius: 3, transition: "width 0.45s ease" }} />
                         </div>
                       </div>
