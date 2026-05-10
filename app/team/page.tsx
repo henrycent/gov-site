@@ -10,7 +10,7 @@ const PEOPLE = [
     facts: [
       ["Born", "Toledo, Ohio"],
       ["Family", "Wife Margaret, three children"],
-      ["Faith", "Practicing Methodist"],
+      ["Faith", "Latter-day Saint (Mormon)"],
       ["Service", "U.S. Army Reserve, 1992–2000"],
     ],
   },
