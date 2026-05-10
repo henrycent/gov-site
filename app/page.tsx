@@ -130,27 +130,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* BUMPER STICKER */}
-      <div style={{ background: "#fff", padding: "18px 1.5rem", textAlign: "center" }}>
-        <div style={{
-          display: "inline-flex", alignItems: "stretch",
-          borderRadius: 8, overflow: "hidden",
-          border: "2px solid #b22234",
-          boxShadow: "0 4px 12px rgba(0,0,0,0.18), 0 1px 4px rgba(0,0,0,0.12)",
-        }}>
-          <div style={{ width: 14, background: "repeating-linear-gradient(180deg, #b22234 0 33%, #fff 33% 66%, #0a2463 66% 100%)" }} />
-          <div style={{ background: NAVY, padding: "10px 28px", display: "flex", flexDirection: "column", alignItems: "center", gap: 3 }}>
-            <span style={{ color: "#f5c518", fontWeight: 900, fontSize: "clamp(14px, 2.5vw, 20px)", letterSpacing: "3px", textTransform: "uppercase", fontFamily: F }}>SHUMARD &middot; CENTLIVRE 2028</span>
-            <span style={{ color: "rgba(255,255,255,0.75)", fontSize: "clamp(10px, 1.4vw, 13px)", fontStyle: "italic", letterSpacing: "2px" }}>Strength. Integrity. Together.</span>
-          </div>
-          <div style={{ width: 14, background: "repeating-linear-gradient(180deg, #b22234 0 33%, #fff 33% 66%, #0a2463 66% 100%)" }} />
-        </div>
-      </div>
-
-      {/* CONSTITUTION PREAMBLE TICKER — parchment scroll */}
+      {/* CONSTITUTION PREAMBLE TICKER + BUMPER STICKER — parchment scroll */}
       <div style={{
         background: "linear-gradient(180deg, #f8edd2 0%, #e9cf8c 40%, #f2e0a8 70%, #e6c97a 100%)",
-        padding: "13px 0",
+        padding: "22px 0 18px",
         overflow: "hidden",
         borderTop: "2px solid #b8923a",
         borderBottom: "2px solid #b8923a",
@@ -159,9 +142,26 @@ export default function Home() {
       }}>
         {/* aged paper grain overlay */}
         <div style={{ position: "absolute", inset: 0, backgroundImage: "repeating-linear-gradient(97deg, rgba(160,100,20,0.04) 0 1px, transparent 1px 6px), repeating-linear-gradient(4deg, rgba(180,120,30,0.03) 0 1px, transparent 1px 9px)", pointerEvents: "none" }} />
+        {/* Bumper sticker centered over parchment */}
+        <div style={{ textAlign: "center", marginBottom: "16px", position: "relative" }}>
+          <div style={{
+            display: "inline-flex", alignItems: "stretch",
+            borderRadius: 8, overflow: "hidden",
+            border: "2px solid #b22234",
+            boxShadow: "0 4px 14px rgba(0,0,0,0.22), 0 1px 4px rgba(0,0,0,0.14)",
+          }}>
+            <div style={{ width: 13, background: "repeating-linear-gradient(180deg, #b22234 0 33%, #fff 33% 66%, #0a2463 66% 100%)" }} />
+            <div style={{ background: NAVY, padding: "9px 26px", display: "flex", flexDirection: "column", alignItems: "center", gap: 3 }}>
+              <span style={{ color: "#f5c518", fontWeight: 900, fontSize: "clamp(14px, 2.5vw, 20px)", letterSpacing: "3px", textTransform: "uppercase", fontFamily: F }}>SHUMARD &middot; CENTLIVRE 2028</span>
+              <span style={{ color: "rgba(255,255,255,0.75)", fontSize: "clamp(10px, 1.4vw, 13px)", fontStyle: "italic", letterSpacing: "2px" }}>Strength. Integrity. Together.</span>
+            </div>
+            <div style={{ width: 13, background: "repeating-linear-gradient(180deg, #b22234 0 33%, #fff 33% 66%, #0a2463 66% 100%)" }} />
+          </div>
+        </div>
+        {/* Scrolling preamble */}
         <div className="ticker-track" style={{ position: "relative" }}>
           {[0, 1].map((n) => (
-            <span key={n} style={{ display: "inline-block", whiteSpace: "nowrap", paddingRight: "5rem", color: "rgba(72,38,6,0.82)", fontSize: "clamp(11px, 1.3vw, 13px)", letterSpacing: "2px", fontFamily: "var(--font-playfair), Georgia, serif", fontStyle: "italic" }}>
+            <span key={n} style={{ display: "inline-block", whiteSpace: "nowrap", paddingRight: "5rem", color: "rgba(72,38,6,0.82)", fontSize: "clamp(13px, 1.6vw, 16px)", letterSpacing: "2px", fontFamily: "var(--font-playfair), Georgia, serif", fontStyle: "italic" }}>
               We the People of the United States, in Order to form a more perfect Union, establish Justice, insure domestic Tranquility, provide for the common defence, promote the general Welfare, and secure the Blessings of Liberty to ourselves and our Posterity, do ordain and establish this Constitution for the United States of America
               <span style={{ color: "rgba(120,70,10,0.4)", margin: "0 2rem" }}>&#9733;</span>
             </span>
