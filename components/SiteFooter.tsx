@@ -9,7 +9,7 @@ export default function SiteFooter() {
       position: "relative",
       overflow: "hidden",
     }}>
-      <div className="stripe-divider" style={{ position: "absolute", top: 0, left: 0, right: 0 }} />
+
 
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 1.5rem" }}>
         <div style={{

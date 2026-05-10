@@ -77,9 +77,9 @@ export default function Home() {
         <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "35%", background: "linear-gradient(0deg, rgba(0,0,0,0.35) 0%, transparent 100%)", pointerEvents: "none" }} />
         {mounted && <StarField count={100} goldRatio={0.15} />}
 
-        <div style={{ position: "relative", zIndex: 1, maxWidth: "1000px" }}>
+        <div style={{ position: "relative", zIndex: 1, maxWidth: "1000px", margin: "0 auto", textAlign: "center" }}>
           {/* Eyebrow */}
-          <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "2rem" }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "12px", marginBottom: "2rem" }}>
             <div style={{ width: "32px", height: "2px", background: "#f5c518" }} />
             <p style={{ color: "#f5c518", fontSize: "11px", letterSpacing: "6px", textTransform: "uppercase", margin: 0 }}>2028 Presidential Campaign</p>
           </div>
@@ -96,7 +96,7 @@ export default function Home() {
           }}>SHUMARD</h1>
 
           {/* Divider with stars */}
-          <div style={{ display: "flex", alignItems: "center", gap: "10px", margin: "0.4em 0" }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", margin: "0.4em 0" }}>
             <div style={{ width: "48px", height: "2px", background: "#f5c518" }} />
             <span style={{ color: "#f5c518", fontSize: "13px", letterSpacing: "10px" }}>&#9733; &#9733; &#9733;</span>
           </div>
@@ -120,13 +120,12 @@ export default function Home() {
             lineHeight: 1.85,
             marginBottom: "3rem",
             fontStyle: "italic",
-            borderLeft: "2px solid rgba(245,197,24,0.4)",
-            paddingLeft: "1rem",
+            margin: "0 auto 3rem",
           }}>
             &ldquo;Strength, Integrity, and a Future We Build Together&rdquo;
           </p>
 
-          <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+          <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: "center" }}>
             <Link href="/volunteer" className="btn-primary" style={{ background: "linear-gradient(180deg,#f2ede4,#ddd7ca)", color: "#0a1628", border: "2px solid #c8c2b4", boxShadow: "0 6px 0 rgba(0,0,0,0.28), 0 14px 30px rgba(0,0,0,0.35)" }}>Join Our Campaign</Link>
             <Link href="/platform" className="btn-ghost">Our Platform</Link>
           </div>

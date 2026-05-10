@@ -27,17 +27,10 @@ export default function SiteNav() {
 
   return (
     <>
-      {/* Top thin stripe banner */}
-      <div style={{
-        height: 6,
-        background: "linear-gradient(90deg, #b22234 0 33%, #fff 33% 66%, #0a2463 66% 100%)",
-        position: "fixed", top: 0, left: 0, right: 0, zIndex: 110,
-      }} />
-
       <nav
         style={{
           position: "fixed",
-          top: 6, left: 0, right: 0, zIndex: 100,
+          top: 0, left: 0, right: 0, zIndex: 100,
           background: scrolled
             ? "rgba(5, 13, 45, 0.92)"
             : "linear-gradient(180deg, rgba(5,13,45,0.85), rgba(5,13,45,0.55))",
