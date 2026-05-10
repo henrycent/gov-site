@@ -158,15 +158,24 @@ export default function Home() {
             <div style={{ width: 13, background: "repeating-linear-gradient(180deg, #b22234 0 33%, #fff 33% 66%, #0a2463 66% 100%)" }} />
           </div>
         </div>
-        {/* Scrolling preamble */}
-        <div className="ticker-track" style={{ position: "relative" }}>
-          {[0, 1].map((n) => (
-            <span key={n} style={{ display: "inline-block", whiteSpace: "nowrap", paddingRight: "5rem", color: "rgba(72,38,6,0.82)", fontSize: "clamp(18px, 2.4vw, 26px)", letterSpacing: "2px", fontFamily: "var(--font-playfair), Georgia, serif", fontStyle: "italic" }}>
-              We the People of the United States, in Order to form a more perfect Union, establish Justice, insure domestic Tranquility, provide for the common defence, promote the general Welfare, and secure the Blessings of Liberty to ourselves and our Posterity, do ordain and establish this Constitution for the United States of America
-              <span style={{ color: "rgba(120,70,10,0.4)", margin: "0 2rem" }}>&#9733;</span>
-            </span>
-          ))}
-        </div>
+        {/* Preamble text */}
+        <p style={{
+          position: "relative",
+          textAlign: "center",
+          margin: "0 auto",
+          padding: "0 clamp(1.5rem, 7vw, 7rem)",
+          color: "rgba(72,38,6,0.85)",
+          fontSize: "clamp(18px, 2.4vw, 26px)",
+          letterSpacing: "1.5px",
+          fontFamily: "var(--font-playfair), Georgia, serif",
+          fontStyle: "italic",
+          lineHeight: 1.65,
+        }}>
+          We the People of the United States, in Order to form a more perfect Union, establish Justice,
+          insure domestic Tranquility, provide for the common defence, promote the general Welfare,
+          and secure the Blessings of Liberty to ourselves and our Posterity, do ordain and establish
+          this Constitution for the United States of America.
+        </p>
       </div>
 
       {/* EV TALLY */}
