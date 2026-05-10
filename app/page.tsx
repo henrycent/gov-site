@@ -131,21 +131,10 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    const targets = { ev: 358, states: 36, margin: 8, donations: 142 };
-    const dur = 1800;
-    const start = performance.now();
-    const tick = (t: number) => {
-      const p = Math.min(1, (t - start) / dur);
-      const e = 1 - Math.pow(1 - p, 3);
-      setEvCount(Math.round(targets.ev * e));
-      setStatesCount(Math.round(targets.states * e));
-      setMarginCount(Math.round(targets.margin * e));
-      setDonationCount(Math.round(targets.donations * e));
-      if (p < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-  }, []);
+  const scrollToSection = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    setMenuOpen(false);
+  };
 
   const NAV_ITEMS = [["about","About"],["platform","Platform"],["strategy","Strategy"],["administration","Our Plan"],["meet-the-team","Team"],["volunteer","Volunteer"]];
 
@@ -165,7 +154,7 @@ export default function Home() {
         </div>
         <div style={{ display: "flex", gap: "1.75rem" }} className="desktop-nav">
           {NAV_ITEMS.map(([id, label]) => (
-            <button key={id} onClick={() => scrollTo(id)} style={{ background: "none", border: "none", color: "#fff", fontSize: "14px", cursor: "pointer", fontFamily: F, letterSpacing: "0.5px", padding: "4px 0", borderBottom: "2px solid transparent" }}
+            <button key={id} onClick={() => scrollToSection(id)} style={{ background: "none", border: "none", color: "#fff", fontSize: "14px", cursor: "pointer", fontFamily: F, letterSpacing: "0.5px", padding: "4px 0", borderBottom: "2px solid transparent" }}
               onMouseEnter={e => (e.currentTarget.style.borderBottom = "2px solid rgba(255,255,255,0.8)")}
               onMouseLeave={e => (e.currentTarget.style.borderBottom = "2px solid transparent")}
             >{label}</button>
@@ -177,7 +166,7 @@ export default function Home() {
       {menuOpen && (
         <div style={{ position: "fixed", top: "60px", left: 0, right: 0, zIndex: 99, background: RED, padding: "1rem 2rem", display: "flex", flexDirection: "column", gap: "1rem" }}>
           {NAV_ITEMS.map(([id, label]) => (
-            <button key={id} onClick={() => scrollTo(id)} style={{ background: "none", border: "none", color: "#fff", fontSize: "17px", cursor: "pointer", textAlign: "left", fontFamily: F }}>{label}</button>
+            <button key={id} onClick={() => scrollToSection(id)} style={{ background: "none", border: "none", color: "#fff", fontSize: "17px", cursor: "pointer", textAlign: "left", fontFamily: F }}>{label}</button>
           ))}
         </div>
       )}
@@ -193,11 +182,11 @@ export default function Home() {
             &ldquo;Strength, Integrity, and a Future We Build Together&rdquo;
           </p>
           <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
-            <button onClick={() => scrollTo("volunteer")} style={{ background: "#fff", color: RED, border: "none", padding: "15px 38px", fontSize: "15px", fontWeight: "700", cursor: "pointer", borderRadius: "3px", letterSpacing: "1.5px", fontFamily: F, transition: "transform 0.15s, box-shadow 0.15s", textTransform: "uppercase" }}
+            <button onClick={() => scrollToSection("volunteer")} style={{ background: "#fff", color: RED, border: "none", padding: "15px 38px", fontSize: "15px", fontWeight: "700", cursor: "pointer", borderRadius: "3px", letterSpacing: "1.5px", fontFamily: F, transition: "transform 0.15s, box-shadow 0.15s", textTransform: "uppercase" }}
               onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.04)"; e.currentTarget.style.boxShadow = "0 6px 20px rgba(0,0,0,0.25)"; }}
               onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)"; e.currentTarget.style.boxShadow = "none"; }}
             >Join Our Campaign</button>
-            <button onClick={() => scrollTo("platform")} style={{ background: "transparent", color: "#fff", border: "2px solid rgba(255,255,255,0.55)", padding: "15px 38px", fontSize: "15px", cursor: "pointer", borderRadius: "3px", letterSpacing: "1.5px", fontFamily: F, textTransform: "uppercase" }}
+            <button onClick={() => scrollToSection("platform")} style={{ background: "transparent", color: "#fff", border: "2px solid rgba(255,255,255,0.55)", padding: "15px 38px", fontSize: "15px", cursor: "pointer", borderRadius: "3px", letterSpacing: "1.5px", fontFamily: F, textTransform: "uppercase" }}
               onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,255,255,0.12)")}
               onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
             >Our Platform</button>
@@ -286,8 +275,8 @@ export default function Home() {
             {mounted && (
               <ComposableMap projection="geoAlbersUsa" width={960} height={560} style={{ width: "100%", height: "auto" }}>
                 <Geographies geography={GEO_URL}>
-                  {({ geographies }) =>
-                    geographies.map((geo) => {
+                  {({ geographies }: { geographies: any[] }) =>
+                    geographies.map((geo: any) => {
                       const fips = String(geo.id);
                       const isRed = RED_FIPS.has(fips);
                       const info = STATE_EV[fips];
@@ -546,40 +535,7 @@ export default function Home() {
                 onMouseLeave={e => (e.currentTarget.style.background = RED)}
               >Sign Me Up</button>
             </div>
-            <div
-              style={{
-                position: "relative",
-                background: "rgba(255,255,255,0.04)",
-                border: "1px solid rgba(245,197,24,0.3)",
-                borderRadius: 12,
-                padding: 28,
-              }}
-            >
-              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 12, color: "#fff", fontSize: 12, letterSpacing: 2 }}>
-                <span>SHUMARD</span>
-                <span>HOWELL</span>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  height: 28,
-                  borderRadius: 6,
-                  overflow: "hidden",
-                  border: "2px solid rgba(245,197,24,0.5)",
-                }}
-              >
-                <div style={{ width: "66.5%", background: "linear-gradient(90deg, #7a0f1f, #b22234)" }} />
-                <div style={{ width: "33.5%", background: "linear-gradient(90deg, #1d3893, #0a2463)" }} />
-              </div>
-              <div style={{ display: "flex", justifyContent: "space-between", marginTop: 6, color: "rgba(255,255,255,0.8)", fontSize: 13 }}>
-                <span style={{ color: "#f5c518", fontWeight: 700 }}>358 EV</span>
-                <span>180 EV</span>
-              </div>
-              <div style={{ marginTop: 18, fontSize: 12, color: "rgba(255,255,255,0.55)", lineHeight: 1.6 }}>
-                Projected based on certified results across all 50 states + DC. 270 electoral votes needed to win.
-              </div>
-            </div>
-          </div>
+          )}
         </div>
       </section>
 
@@ -592,39 +548,4 @@ export default function Home() {
   );
 }
 
-function Stat({ number, label, suffix }: { number: number; label: string; suffix: string }) {
-  return (
-    <div
-      className="glass"
-      style={{
-        padding: "18px 14px",
-        borderRadius: 10,
-        textAlign: "center",
-      }}
-    >
-      <div
-        style={{
-          fontFamily: "var(--font-playfair), Georgia, serif",
-          fontSize: 38,
-          fontWeight: 900,
-          color: "#f5c518",
-          lineHeight: 1,
-        }}
-      >
-        {number}
-        <span style={{ fontSize: 22 }}>{suffix}</span>
-      </div>
-      <div style={{ fontSize: 10, letterSpacing: 2, color: "rgba(255,255,255,0.65)", textTransform: "uppercase", marginTop: 8 }}>
-        {label}
-      </div>
-    </div>
-  );
-}
 
-function Star({ size, color }: { size: number; color: string }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill={color} aria-hidden>
-      <path d="M12 2l2.39 4.84L20 7.6l-4 3.9.94 5.5L12 14.77 7.06 17l.94-5.5-4-3.9 5.61-.76L12 2z" />
-    </svg>
-  );
-}

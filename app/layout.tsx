@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display } from "next/font/google";
 import "./globals.css";
-import SiteNav from "@/components/SiteNav";
-import SiteFooter from "@/components/SiteFooter";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -11,16 +9,9 @@ const playfair = Playfair_Display({
   style: ["normal", "italic"],
 });
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
-  weight: ["400", "700", "900"],
-});
-
 export const metadata: Metadata = {
-  title: "Shumard / Centlivre 2028 — A New Vision for America",
-  description:
-    "Official campaign site of Shumard / Centlivre 2028. Strength, integrity, and a future we build together.",
+  title: "Shumard / Centlivre 2028",
+  description: "Official campaign site of Shumard / Centlivre 2028. Strength, Integrity, and a Future We Build Together.",
 };
 
 export default function RootLayout({
