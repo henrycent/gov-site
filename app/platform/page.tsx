@@ -26,7 +26,7 @@ const PILLARS = [
       "Restore NATO credibility and reaffirm Pacific security commitments with treaty allies",
       "Increase defense R&D by 25%, prioritizing hypersonics, cyber operations, and space warfare capabilities",
       "End open-ended nation-building missions abroad — refocus military power on direct American interests",
-      "Modernize the nuclear triad to maintain strategic deterrence for the next generation of Americans",
+      "Maintain a credible nuclear deterrent as a transitional posture while pursuing verifiable arms reduction agreements with adversary nations — strength in the short term, disarmament as the long-term goal",
     ],
   },
   {
@@ -78,7 +78,8 @@ const PILLARS = [
     bullets: [
       "Believe life begins at conception; support states' rights to set their own abortion laws post-Dobbs rather than imposing a federal mandate",
       "Oppose all federal funding of abortion through Medicaid, Title X, or any other appropriation",
-      "Support federal exceptions for rape, incest, and life of the mother, leaving broader policy to the states",
+      "Affirm the dignity of every human life from conception to natural death — no exceptions based on the circumstances of conception; every child deserves legal protection regardless of how they were conceived",
+      "Support treatments for pregnant mothers with life-threatening conditions consistent with the principle of double effect — where the intent is to treat the mother, not to end the child's life directly",
       "Champion adoption reform: streamline domestic adoption, reduce costs, and expand tax credits for adoptive families",
       "Direct federal funding toward crisis pregnancy centers providing counseling, housing, and material support",
       "Oppose late-term abortion and partial-birth abortion with no exceptions at the federal level",
@@ -132,7 +133,7 @@ const PILLARS = [
       "Open responsible drilling on federal lands with strict environmental monitoring and mandatory reclamation bonds",
       "Modernize the national grid to eliminate rolling blackouts and end dependence on Chinese-manufactured components",
       "Fund a National Energy Prize to reward private-sector breakthroughs in storage, fusion, and carbon capture",
-      "Withdraw from the Paris Climate Accord and negotiate direct bilateral agreements with the world's largest emitters",
+      "Reform U.S. participation in international climate agreements to ensure American workers and industries are not disadvantaged — pursue bilateral and multilateral deals that hold major emitters like China and India accountable alongside the United States",
       "Achieve full North American energy independence by 2030 through expanded production and infrastructure buildout",
       "Develop domestic rare earth mining capacity to eliminate dependence on Chinese supply chains for critical minerals",
     ],
