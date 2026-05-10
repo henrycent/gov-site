@@ -62,28 +62,73 @@ export default function Home() {
   return (
     <main style={{ fontFamily: F, background: "#fff", color: "#1a1a1a" }}>
 
-      {/* HERO */}
+      {/* HERO — editorial campaign-poster style */}
       <section style={{
         minHeight: "100vh",
-        background: `linear-gradient(155deg, ${NAVY} 0%, #2C4A7C 40%, ${RED} 85%, #7A1A28 100%)`,
-        display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
-        textAlign: "center", padding: "80px 2rem", position: "relative", overflow: "hidden",
+        background: "#0a1628",
+        display: "flex", flexDirection: "column", justifyContent: "center",
+        padding: "clamp(100px, 14vw, 140px) clamp(2rem, 8vw, 7rem) 60px",
+        position: "relative", overflow: "hidden",
       }}>
-        {mounted && <StarField count={130} goldRatio={0.22} />}
-        <div style={{ position: "relative", zIndex: 1 }}>
-          <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "13px", letterSpacing: "5px", textTransform: "uppercase", marginBottom: "1.5rem" }}>
-            A New Vision for America
-          </p>
-          <h1 style={{ fontSize: "clamp(52px, 9vw, 100px)", fontWeight: "800", color: "#fff", lineHeight: 1.0, marginBottom: "0.4rem", textShadow: "0 2px 24px rgba(0,0,0,0.35)", fontFamily: F }}>
-            SHUMARD
-          </h1>
-          <h2 style={{ fontSize: "clamp(22px, 4vw, 46px)", fontWeight: "400", color: "rgba(255,255,255,0.8)", letterSpacing: "8px", marginBottom: "1.75rem", fontFamily: F }}>
-            CENTLIVRE
-          </h2>
-          <p style={{ fontSize: "clamp(17px, 2.2vw, 24px)", color: "rgba(255,255,255,0.75)", fontStyle: "italic", maxWidth: "580px", margin: "0 auto 3rem" }}>
+        {/* Subtle texture — horizontal rule pattern */}
+        <div style={{ position: "absolute", inset: 0, backgroundImage: "repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0 1px, transparent 1px 40px)", pointerEvents: "none" }} />
+        {/* Left gold rule */}
+        <div style={{ position: "absolute", left: "clamp(1.5rem, 7vw, 6rem)", top: 0, bottom: 0, width: "2px", background: "linear-gradient(180deg, transparent, #f5c518 20%, #f5c518 80%, transparent)", opacity: 0.55 }} />
+        {/* Red stripe block — bottom-right accent */}
+        <div style={{ position: "absolute", bottom: 0, right: 0, width: "38%", top: 0, backgroundImage: "repeating-linear-gradient(180deg, #b22234 0 18px, transparent 18px 36px)", opacity: 0.045, pointerEvents: "none" }} />
+
+        {mounted && <StarField count={55} goldRatio={0.12} seed={42} />}
+
+        <div style={{ position: "relative", zIndex: 1, maxWidth: "1000px" }}>
+          {/* Eyebrow */}
+          <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "2rem" }}>
+            <div style={{ width: "32px", height: "2px", background: "#f5c518" }} />
+            <p style={{ color: "#f5c518", fontSize: "11px", letterSpacing: "6px", textTransform: "uppercase", margin: 0 }}>2028 Presidential Campaign</p>
+          </div>
+
+          {/* SHUMARD — dominant */}
+          <h1 style={{
+            fontSize: "clamp(74px, 16vw, 172px)",
+            fontWeight: "900",
+            color: "#fff",
+            lineHeight: 0.88,
+            margin: "0 0 0.15em",
+            letterSpacing: "-3px",
+            fontFamily: F,
+          }}>SHUMARD</h1>
+
+          {/* Divider with stars */}
+          <div style={{ display: "flex", alignItems: "center", gap: "10px", margin: "0.4em 0" }}>
+            <div style={{ width: "48px", height: "2px", background: "#f5c518" }} />
+            <span style={{ color: "#f5c518", fontSize: "13px", letterSpacing: "10px" }}>&#9733; &#9733; &#9733;</span>
+          </div>
+
+          {/* CENTLIVRE — lighter, italic */}
+          <h2 style={{
+            fontSize: "clamp(36px, 7.5vw, 84px)",
+            fontWeight: "500",
+            fontStyle: "italic",
+            color: "rgba(255,255,255,0.82)",
+            letterSpacing: "clamp(3px, 1.5vw, 12px)",
+            margin: "0 0 2.5rem",
+            fontFamily: F,
+          }}>CENTLIVRE</h2>
+
+          {/* Tagline */}
+          <p style={{
+            fontSize: "clamp(14px, 1.7vw, 18px)",
+            color: "rgba(255,255,255,0.55)",
+            maxWidth: "480px",
+            lineHeight: 1.85,
+            marginBottom: "3rem",
+            fontStyle: "italic",
+            borderLeft: "2px solid rgba(245,197,24,0.4)",
+            paddingLeft: "1rem",
+          }}>
             &ldquo;Strength, Integrity, and a Future We Build Together&rdquo;
           </p>
-          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+
+          <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
             <Link href="/volunteer" className="btn-primary">Join Our Campaign</Link>
             <Link href="/platform" className="btn-ghost">Our Platform</Link>
           </div>

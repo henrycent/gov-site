@@ -1,4 +1,4 @@
-import ElectionMap from "@/components/ElectionMap";
+import GeoMap from "@/components/GeoMap";
 
 export default function MapPage() {
   return (
@@ -37,7 +37,7 @@ export default function MapPage() {
 
       <section style={{ padding: "60px 1.5rem 96px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <ElectionMap />
+          <GeoMap />
         </div>
       </section>
 

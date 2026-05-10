@@ -114,14 +114,20 @@ const BUDGET: BudgetItem[] = [
   },
 ];
 
-function BudgetRow({ item }: { item: BudgetItem }) {
+function BudgetRow({ item, bombed }: { item: BudgetItem; bombed?: boolean }) {
   const [open, setOpen] = useState(false);
   const currentAmt = Math.round((TOTAL_B * item.currentPct) / 100);
   const proposedAmt = Math.round((TOTAL_B * item.proposedPct) / 100);
   const diff = item.proposedPct - item.currentPct;
 
   return (
-    <div style={{ borderRadius: "8px", border: "1px solid #e4e2de", overflow: "hidden", marginBottom: "8px" }}>
+    <div style={{
+      borderRadius: "8px",
+      border: bombed ? "2px solid #ff6600" : "1px solid #e4e2de",
+      overflow: "hidden", marginBottom: "8px",
+      boxShadow: bombed ? "0 0 24px rgba(255,100,0,0.45)" : "none",
+      transition: "box-shadow 0.5s ease, border-color 0.5s ease",
+    }}>
       <button
         onClick={() => setOpen(!open)}
         style={{
@@ -162,6 +168,19 @@ function BudgetRow({ item }: { item: BudgetItem }) {
         <span style={{ color: "#bbb", fontSize: "14px", flexShrink: 0 }}>{open ? "▲" : "▼"}</span>
       </button>
 
+      {bombed && (
+        <div style={{
+          background: "linear-gradient(135deg, #c63000, #ff6600)",
+          color: "#fff", padding: "0.55rem 1.25rem",
+          fontSize: "13px", fontWeight: "700",
+          display: "flex", alignItems: "center", gap: "8px",
+          fontFamily: F, letterSpacing: "0.5px",
+          borderTop: "1px solid rgba(255,255,255,0.2)",
+        }}>
+          💥 FISCAL STRIKE — Debt interest target reduced to 7%. Disciplined spending wins.
+        </div>
+      )}
+
       {open && (
         <div style={{ padding: "1rem 1.25rem 1.25rem", background: "#f9f8f7", borderTop: "1px solid #e4e2de" }}>
           <p style={{ fontSize: "14px", color: "#555", lineHeight: 1.7, marginBottom: "1.25rem", marginTop: 0 }}>{item.detail}</p>
@@ -187,67 +206,105 @@ function BudgetRow({ item }: { item: BudgetItem }) {
 
 function FighterJet() {
   return (
-    <svg viewBox="0 0 180 56" width="170" height="52" aria-hidden>
-      {/* fuselage */}
-      <polygon points="8,28 45,20 168,22 168,34 45,36" fill="#d0d0d0" />
-      {/* nose cone */}
-      <polygon points="3,28 45,20 45,36" fill="#e0e0e0" />
-      {/* main swept wing */}
-      <polygon points="88,24 115,50 68,50 72,26" fill="#b8b8b8" />
-      {/* vertical stabilizer */}
-      <polygon points="44,22 58,6 52,22" fill="#c4c4c4" />
-      {/* horizontal stabilizer */}
-      <polygon points="44,34 58,46 52,34" fill="#c0c0c0" />
-      {/* canopy */}
-      <ellipse cx="136" cy="21" rx="20" ry="5.5" fill="#7aafdf" opacity="0.9" />
-      {/* afterburner */}
-      <ellipse cx="170" cy="28" rx="6" ry="3" fill="#ff8c00" />
-      <ellipse cx="175" cy="28" rx="10" ry="2" fill="#ffd000" opacity="0.65" />
+    <svg viewBox="0 0 380 100" width="360" height="95" aria-hidden>
+      {/* Main fuselage */}
+      <path d="M 3,50 L 48,40 L 268,30 L 312,27 L 340,30 L 356,50 L 340,70 L 312,73 L 268,70 L 48,60 Z" fill="#c8c8c8"/>
+      {/* Nose tip */}
+      <polygon points="1,50 48,40 48,60" fill="#dcdcdc"/>
+      {/* LERX - leading edge root extension strake */}
+      <path d="M 100,46 L 205,24 L 258,38 L 258,50 Z" fill="#bebebe"/>
+      {/* Main delta wing */}
+      <path d="M 108,58 L 218,96 L 338,70 L 332,54 Z" fill="#b4b4b4"/>
+      {/* Wing highlight edge */}
+      <line x1="108" y1="58" x2="218" y2="96" stroke="#c8c8c8" strokeWidth="1.2"/>
+      {/* Horizontal stabilizer */}
+      <path d="M 312,56 L 338,43 L 354,50 L 342,66 L 312,70 Z" fill="#c0c0c0"/>
+      {/* Vertical tail fin */}
+      <path d="M 295,30 L 304,4 L 323,15 L 318,30 Z" fill="#c4c4c4"/>
+      {/* Engine intake under fuselage */}
+      <rect x="145" y="60" width="62" height="13" rx="2" fill="#5a5a5a" opacity="0.85"/>
+      <rect x="148" y="60" width="56" height="7" rx="1" fill="#383838" opacity="0.7"/>
+      {/* Canopy bubble */}
+      <path d="M 222,30 Q 244,14 282,15 Q 308,16 312,30 Z" fill="#79b8d8" opacity="0.9"/>
+      <path d="M 222,30 Q 244,14 282,15 Q 308,16 312,30" fill="none" stroke="#5a8fa8" strokeWidth="1.5"/>
+      {/* Canopy divider */}
+      <line x1="258" y1="16" x2="255" y2="30" stroke="#5a8fa8" strokeWidth="1.2"/>
+      {/* Pilot helmet */}
+      <ellipse cx="272" cy="19" rx="7" ry="6.5" fill="#1a1a2e" opacity="0.75"/>
+      <ellipse cx="273" cy="18" rx="4" ry="3" fill="#2a4080" opacity="0.5"/>
+      {/* Exhaust nozzle */}
+      <ellipse cx="357" cy="50" rx="8" ry="9" fill="#888"/>
+      <ellipse cx="357" cy="50" rx="5" ry="6" fill="#666"/>
+      {/* Afterburner flame */}
+      <ellipse cx="367" cy="50" rx="14" ry="6" fill="#ff7700" opacity="0.97"/>
+      <ellipse cx="378" cy="50" rx="20" ry="4" fill="#ffd000" opacity="0.82"/>
+      <ellipse cx="386" cy="50" rx="10" ry="2.2" fill="#fff8a0" opacity="0.55"/>
+      {/* Fuselage panel line detail */}
+      <path d="M 48,42 L 268,32" stroke="#aaa" strokeWidth="0.6" fill="none"/>
+      <path d="M 48,58 L 268,68" stroke="#aaa" strokeWidth="0.6" fill="none"/>
+      {/* Belly centerline */}
+      <path d="M 60,50 L 145,52 L 208,52 L 265,50" stroke="#a8a8a8" strokeWidth="0.5" fill="none"/>
     </svg>
   );
 }
 
-function JetFlyby() {
-  const [started, setStarted] = useState(false);
-
-  useEffect(() => {
-    const t = setTimeout(() => setStarted(true), 600);
-    return () => clearTimeout(t);
-  }, []);
-
+function BombSVG() {
   return (
-    <div style={{
-      position: "relative", height: "80px", overflow: "hidden", borderRadius: "8px",
-      background: "linear-gradient(180deg, #050d2d 0%, #0d1f3c 100%)",
-      margin: "2.5rem 0",
-    }}>
-      {/* stars */}
-      {Array.from({ length: 32 }).map((_, i) => (
+    <svg viewBox="0 0 18 46" width="16" height="42" aria-hidden>
+      <line x1="9" y1="0" x2="9" y2="6" stroke="#ccc" strokeWidth="2"/>
+      <circle cx="9" cy="5" r="2.8" fill="#ffcc00"/>
+      <ellipse cx="9" cy="22" rx="7.5" ry="15" fill="#222"/>
+      <ellipse cx="9" cy="17" rx="4.5" ry="8" fill="#303030" opacity="0.45"/>
+      <polygon points="3,36 0,46 9,39" fill="#444"/>
+      <polygon points="15,36 18,46 9,39" fill="#444"/>
+      <polygon points="4,38 5,46 9,39" fill="#333"/>
+      <polygon points="14,38 13,46 9,39" fill="#333"/>
+    </svg>
+  );
+}
+
+function ExplosionBurst() {
+  const sparks: [number, number, string][] = [
+    [-40,-30,"#ff8800"], [38,-22,"#ffcc00"], [-20,-46,"#ff4400"],
+    [32,-42,"#ff8800"], [2,-50,"#ffcc00"], [-44,-12,"#ff4400"], [46,-14,"#ff8800"],
+  ];
+  return (
+    <div style={{ position: "relative", width: 0, height: 0, pointerEvents: "none" }}>
+      <div style={{
+        position: "absolute", width: 90, height: 90, borderRadius: "50%",
+        background: "radial-gradient(circle, #fff 0%, #ffe066 25%, #ff6600 65%, transparent 100%)",
+        animation: "explode 0.85s ease-out forwards",
+      }}/>
+      <div style={{
+        position: "absolute", width: 70, height: 70, borderRadius: "50%",
+        border: "10px solid #ff5500",
+        animation: "explode-ring 1.0s ease-out forwards",
+      }}/>
+      <div style={{
+        position: "absolute", width: 110, height: 70, borderRadius: "50%",
+        background: "radial-gradient(ellipse, rgba(60,60,60,0.55) 0%, transparent 70%)",
+        animation: "explode-smoke 1.4s ease-out 0.15s forwards",
+        opacity: 0,
+      }}/>
+      {sparks.map(([tx, ty, color], i) => (
         <div key={i} style={{
           position: "absolute",
-          width: i % 5 === 0 ? "3px" : "2px",
-          height: i % 5 === 0 ? "3px" : "2px",
+          left: `calc(50% + ${tx}px)`, top: `calc(50% + ${ty}px)`,
+          width: 6 + (i % 3) * 3, height: 6 + (i % 3) * 3,
           borderRadius: "50%",
-          background: i % 7 === 0 ? "#f5c518" : "#fff",
-          top: `${((i * 19 + 5) % 88) + 6}%`,
-          left: `${((i * 37 + 11) % 96) + 2}%`,
-          opacity: 0.5 + (i % 3) * 0.2,
-        }} />
+          background: color,
+          animation: `fade-up 0.55s ease-out ${i * 0.055}s both`,
+          transform: "translate(-50%, -50%)",
+        }}/>
       ))}
-      {/* contrail */}
-      {started && <div className="jet-contrail" style={{ top: "calc(50% - 1px)" }} />}
-      {/* jet */}
-      {started && (
-        <div className="jet-fly">
-          <FighterJet />
-        </div>
-      )}
     </div>
   );
 }
 
 export default function AdminPage() {
   const [mounted, setMounted] = useState(false);
+  const [jetPhase, setJetPhase] = useState<"idle" | "flying" | "bombing" | "exploded">("idle");
+  const [bombY, setBombY] = useState(22);
 
   useEffect(() => {
     setMounted(true);
@@ -258,6 +315,17 @@ export default function AdminPage() {
     document.querySelectorAll(".reveal, .reveal-left, .reveal-right").forEach((el) => io.observe(el));
     return () => io.disconnect();
   }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+    const t1 = setTimeout(() => setJetPhase("flying"), 600);
+    const t2 = setTimeout(() => {
+      setJetPhase("bombing");
+      requestAnimationFrame(() => requestAnimationFrame(() => setBombY(378)));
+    }, 3400);
+    const t3 = setTimeout(() => setJetPhase("exploded"), 4750);
+    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
+  }, [mounted]);
 
   return (
     <main style={{ fontFamily: F, background: "#fff", color: "#1a1a1a" }}>
@@ -384,33 +452,72 @@ export default function AdminPage() {
             <p style={{ fontSize: "13px", color: "#888", marginTop: "1rem" }}>Click any category to see a detailed breakdown.</p>
           </div>
 
-          <div className="reveal">
-            {/* Legend */}
-            <div style={{ display: "flex", gap: "1.5rem", marginBottom: "1.25rem", flexWrap: "wrap" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "13px", color: "#555" }}>
-                <span style={{ width: 12, height: 12, background: "#4A6FA5", display: "inline-block", borderRadius: "2px" }} />
-                Current Budget (FY2028 Projected, $7.1T total)
-              </div>
-              <div style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "13px", color: "#555" }}>
-                <span style={{ width: 12, height: 12, background: RED, display: "inline-block", borderRadius: "2px" }} />
-                Shumard / Centlivre Proposed
-              </div>
+          {/* Legend */}
+          <div style={{ display: "flex", gap: "1.5rem", marginBottom: "1.25rem", flexWrap: "wrap" }} className="reveal">
+            <div style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "13px", color: "#555" }}>
+              <span style={{ width: 12, height: 12, background: "#4A6FA5", display: "inline-block", borderRadius: "2px" }} />
+              Current Budget (FY2028 Projected, $7.1T total)
             </div>
-
-            {BUDGET.map((item) => (
-              <BudgetRow key={item.label} item={item} />
-            ))}
-
-            <div style={{ marginTop: "1.5rem", background: "#fff", padding: "1.25rem 1.5rem", borderRadius: "8px", fontSize: "13px", color: "#555", lineHeight: 1.75, borderLeft: `4px solid ${NAVY}` }}>
-              <strong style={{ color: NAVY, fontFamily: F }}>Key Changes: </strong>
-              Defense rises from 13% to 19% (+$426B) reflecting military readiness investment.
-              Debt interest drops from 13% to 10% through disciplined fiscal policy.
-              Healthcare savings of 4pp ($284B) through market-based reform.
+            <div style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "13px", color: "#555" }}>
+              <span style={{ width: 12, height: 12, background: RED, display: "inline-block", borderRadius: "2px" }} />
+              Shumard / Centlivre Proposed
             </div>
           </div>
 
-          {/* FIGHTER JET */}
-          {mounted && <JetFlyby />}
+          {/* Budget rows with jet overlay */}
+          <div className="reveal" style={{ position: "relative" }}>
+            {/* Jet / bomb overlay — flies over the budget rows */}
+            {mounted && jetPhase !== "idle" && (
+              <div style={{
+                position: "absolute",
+                top: "-25px", left: "-20px", right: "-20px",
+                height: "540px",
+                pointerEvents: "none",
+                zIndex: 10,
+                overflow: "visible",
+              }}>
+                {/* Jet */}
+                <div className="jet-fly" style={{ top: 8 }}>
+                  <FighterJet />
+                </div>
+                {/* Contrail */}
+                <div className="jet-contrail" style={{ top: 52 }} />
+                {/* Bomb */}
+                {(jetPhase === "bombing" || jetPhase === "exploded") && (
+                  <div style={{
+                    position: "absolute",
+                    left: "57%",
+                    top: `${bombY}px`,
+                    transition: "top 1.35s ease-in",
+                    transform: "translateX(-50%)",
+                  }}>
+                    <BombSVG />
+                  </div>
+                )}
+                {/* Explosion */}
+                {jetPhase === "exploded" && (
+                  <div style={{ position: "absolute", left: "57%", top: "380px" }}>
+                    <ExplosionBurst />
+                  </div>
+                )}
+              </div>
+            )}
+
+            {BUDGET.map((item) => (
+              <BudgetRow
+                key={item.label}
+                item={item}
+                bombed={jetPhase === "exploded" && item.label === "Interest on Debt"}
+              />
+            ))}
+          </div>
+
+          <div style={{ marginTop: "1.5rem", background: "#fff", padding: "1.25rem 1.5rem", borderRadius: "8px", fontSize: "13px", color: "#555", lineHeight: 1.75, borderLeft: `4px solid ${NAVY}` }} className="reveal">
+            <strong style={{ color: NAVY, fontFamily: F }}>Key Changes: </strong>
+            Defense rises from 13% to 19% (+$426B) reflecting military readiness investment.
+            Debt interest drops from 13% to 10% through disciplined fiscal policy.
+            Healthcare savings of 4pp ($284B) through market-based reform.
+          </div>
         </div>
       </section>
 
