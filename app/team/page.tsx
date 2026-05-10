@@ -23,7 +23,7 @@ const PEOPLE = [
     facts: [
       ["Born", "Fort Wayne, Indiana"],
       ["Family", "Wife Eleanor, two children"],
-      ["Faith", "Practicing Catholic"],
+      ["Faith", "Roman Catholic"],
       ["Career", "30 years in public service"],
     ],
   },
