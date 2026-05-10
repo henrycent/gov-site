@@ -256,19 +256,49 @@ export default function ElectionMap() {
                 <div style={{ fontSize: 18, fontWeight: 800, marginTop: 2 }}>
                   {focus.w === "shumard" ? "SHUMARD / CENTLIVRE" : "HOWELL / RIVERA"}
                 </div>
-                <div style={{ fontSize: 13, marginTop: 6, color: "#f5c518" }}>
-                  Margin: +{focus.margin.toFixed(1)}%
+                <div style={{ fontSize: 13, marginTop: 4, color: "#f5c518" }}>
+                  +{focus.margin.toFixed(1)}% margin
                 </div>
               </div>
 
-              <div style={{ fontSize: 12, lineHeight: 1.7, color: "rgba(255,255,255,0.7)" }}>
+              {/* Vote split bars */}
+              {(() => {
+                const winPct = parseFloat((50 + focus.margin / 2).toFixed(1));
+                const losePct = parseFloat((50 - focus.margin / 2).toFixed(1));
+                const [sPct, hPct] = focus.w === "shumard" ? [winPct, losePct] : [losePct, winPct];
+                return (
+                  <div style={{ marginBottom: 16 }}>
+                    <div style={{ fontSize: 10, letterSpacing: 2, opacity: 0.7, marginBottom: 8 }}>VOTE SHARE (EST.)</div>
+                    <div style={{ marginBottom: 6 }}>
+                      <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, marginBottom: 3 }}>
+                        <span style={{ color: "#e63946" }}>Shumard</span>
+                        <span style={{ color: "rgba(255,255,255,0.8)" }}>{sPct}%</span>
+                      </div>
+                      <div style={{ height: 6, borderRadius: 3, background: "rgba(255,255,255,0.1)", overflow: "hidden" }}>
+                        <div style={{ height: "100%", width: `${sPct}%`, background: "linear-gradient(90deg,#7a0f1f,#e63946)", borderRadius: 3, transition: "width 0.4s ease" }} />
+                      </div>
+                    </div>
+                    <div>
+                      <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, marginBottom: 3 }}>
+                        <span style={{ color: "#1d3893" }}>Howell</span>
+                        <span style={{ color: "rgba(255,255,255,0.8)" }}>{hPct}%</span>
+                      </div>
+                      <div style={{ height: 6, borderRadius: 3, background: "rgba(255,255,255,0.1)", overflow: "hidden" }}>
+                        <div style={{ height: "100%", width: `${hPct}%`, background: "linear-gradient(90deg,#050d2d,#1d3893)", borderRadius: 3, transition: "width 0.4s ease" }} />
+                      </div>
+                    </div>
+                  </div>
+                );
+              })()}
+
+              <div style={{ fontSize: 12, lineHeight: 1.7, color: "rgba(255,255,255,0.65)" }}>
                 {focus.w === "shumard"
-                  ? `Voters in ${focus.name} delivered for the Shumard / Centlivre ticket on a message of jobs, security, and a return to common sense.`
-                  : `${focus.name} held with the Howell / Rivera ticket, but down sharply from the previous cycle's margin.`}
+                  ? `${focus.name} backed Shumard / Centlivre on a message of jobs, security, and common sense governance.`
+                  : `${focus.name} went for Howell / Rivera, though the margin was tighter than the previous cycle.`}
               </div>
 
-              <div style={{ marginTop: 22, fontSize: 11, color: "rgba(255,255,255,0.5)" }}>
-                Tap any state to see results.
+              <div style={{ marginTop: 18, fontSize: 11, color: "rgba(255,255,255,0.4)" }}>
+                Hover or tap any state to explore.
               </div>
             </div>
           ) : (
