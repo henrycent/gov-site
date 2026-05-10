@@ -1,12 +1,12 @@
 declare module 'react-simple-maps' {
-  import { ComponentType, ReactNode, SVGProps } from 'react';
+  import { ComponentType, ReactNode, SVGProps, CSSProperties } from 'react';
 
   export interface ComposableMapProps {
     projection?: string;
     projectionConfig?: Record<string, unknown>;
     width?: number;
     height?: number;
-    style?: React.CSSProperties;
+    style?: CSSProperties;
     children?: ReactNode;
     [key: string]: unknown;
   }
@@ -25,8 +25,20 @@ declare module 'react-simple-maps' {
     properties: Record<string, unknown>;
     [key: string]: unknown;
   }
-  export interface GeographyProps extends SVGProps<SVGPathElement> {
+  export interface GeographyStyle {
+    default?: CSSProperties;
+    hover?: CSSProperties;
+    pressed?: CSSProperties;
+  }
+  export interface GeographyProps {
     geography: Geography;
+    style?: GeographyStyle;
+    fill?: string;
+    stroke?: string;
+    strokeWidth?: number;
+    onClick?: (geo: Geography) => void;
+    onMouseEnter?: (geo: Geography, evt: React.MouseEvent) => void;
+    onMouseLeave?: (geo: Geography, evt: React.MouseEvent) => void;
     [key: string]: unknown;
   }
   export const Geography: ComponentType<GeographyProps>;
