@@ -320,7 +320,7 @@ export default function AdminPage() {
   }, [mounted]);
 
   return (
-    <main style={{ fontFamily: F, background: "#fff", color: "#1a1a1a" }}>
+    <main style={{ background: "#fff", color: "#1a1a1a" }}>
 
       {/* HERO */}
       <section style={{

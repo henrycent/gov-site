@@ -60,7 +60,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main style={{ fontFamily: F, background: "#fff", color: "#1a1a1a" }}>
+    <main style={{ background: "#fff", color: "#1a1a1a" }}>
 
       {/* HERO */}
       <section style={{
@@ -74,19 +74,24 @@ export default function Home() {
         <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 60% at 20% 30%, rgba(245,197,24,0.07) 0%, transparent 70%)", pointerEvents: "none" }} />
         {/* Soft vignette bottom */}
         <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "35%", background: "linear-gradient(0deg, rgba(0,0,0,0.35) 0%, transparent 100%)", pointerEvents: "none" }} />
-        {/* Flag-style 50 stars — upper right */}
-        <div style={{ position: "absolute", top: "clamp(86px, 10vw, 108px)", right: "clamp(2rem, 6vw, 5rem)", opacity: 0.22, pointerEvents: "none" }}>
-          <svg width="168" height="182" viewBox="0 0 168 182" aria-hidden>
-            {[6,5,6,5,6,5,6,5,6].flatMap((count, row) =>
-              Array.from({ length: count }, (_, col) => {
-                const xOff = count === 5 ? 14 : 0;
-                const x = col * 28 + xOff + 14;
-                const y = row * 20 + 12;
-                return <text key={`${row}-${col}`} x={x} y={y} fontSize={11} fill="#fff" textAnchor="middle" dominantBaseline="middle">★</text>;
-              })
-            )}
-          </svg>
-        </div>
+        {/* 50 flag stars spread throughout hero */}
+        {mounted && Array.from({ length: 50 }, (_, i) => {
+          const a = (i * 0.6180339887) % 1;
+          const b = ((i + 0.5) * 0.3819660113) % 1;
+          return (
+            <span key={i} style={{
+              position: "absolute",
+              left: `${2 + a * 92}%`,
+              top: `${3 + b * 88}%`,
+              fontSize: `${9 + Math.floor(a * 7)}px`,
+              color: "#fff",
+              opacity: 0.13 + b * 0.2,
+              pointerEvents: "none",
+              lineHeight: 1,
+              userSelect: "none",
+            }}>&#9733;</span>
+          );
+        })}
 
         <div style={{ position: "relative", zIndex: 1, maxWidth: "1000px" }}>
           {/* Eyebrow */}
