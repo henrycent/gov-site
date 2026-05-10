@@ -28,7 +28,6 @@ const CABINET = [
 
 type BudgetItem = {
   label: string;
-  icon: string;
   currentPct: number;
   proposedPct: number;
   detail: string;
@@ -38,7 +37,6 @@ type BudgetItem = {
 const BUDGET: BudgetItem[] = [
   {
     label: "Social Security",
-    icon: "👴",
     currentPct: 21,
     proposedPct: 19,
     detail: "Modernize for long-term solvency while protecting current retirees. Expand personal investment accounts for workers under 50.",
@@ -50,7 +48,6 @@ const BUDGET: BudgetItem[] = [
   },
   {
     label: "Medicare & Medicaid",
-    icon: "🏥",
     currentPct: 24,
     proposedPct: 20,
     detail: "Inject market competition to reduce costs while protecting beneficiaries. Cap prescription drug price increases at CPI.",
@@ -63,7 +60,6 @@ const BUDGET: BudgetItem[] = [
   },
   {
     label: "National Defense",
-    icon: "🛡️",
     currentPct: 13,
     proposedPct: 19,
     detail: "Rebuild military readiness: 350-ship Navy, next-gen Air Force, Space Force expansion. Fully fund personnel and modernize equipment.",
@@ -76,7 +72,6 @@ const BUDGET: BudgetItem[] = [
   },
   {
     label: "Interest on Debt",
-    icon: "📉",
     currentPct: 13,
     proposedPct: 10,
     detail: "Reduced through disciplined fiscal policy and sustained economic growth. Balanced Budget Amendment to prevent future debt accumulation.",
@@ -87,7 +82,6 @@ const BUDGET: BudgetItem[] = [
   },
   {
     label: "Other Mandatory",
-    icon: "📋",
     currentPct: 18,
     proposedPct: 16,
     detail: "Reform and modernize entitlement programs. Target benefits to those who need them most through means-testing and work requirements.",
@@ -101,7 +95,6 @@ const BUDGET: BudgetItem[] = [
   },
   {
     label: "Discretionary",
-    icon: "🏛️",
     currentPct: 11,
     proposedPct: 16,
     detail: "Increase investment in infrastructure, border security, and vocational education while eliminating redundant agencies and bureaucratic waste.",
@@ -136,7 +129,6 @@ function BudgetRow({ item, bombed }: { item: BudgetItem; bombed?: boolean }) {
           display: "flex", alignItems: "center", gap: "1rem",
         }}
       >
-        <span style={{ fontSize: "1.4rem", flexShrink: 0, lineHeight: 1 }}>{item.icon}</span>
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "8px" }}>
             <span style={{ fontWeight: "700", color: NAVY, fontSize: "15px", fontFamily: F }}>{item.label}</span>
@@ -177,7 +169,7 @@ function BudgetRow({ item, bombed }: { item: BudgetItem; bombed?: boolean }) {
           fontFamily: F, letterSpacing: "0.5px",
           borderTop: "1px solid rgba(255,255,255,0.2)",
         }}>
-          💥 FISCAL STRIKE — Debt interest target reduced to 7%. Disciplined spending wins.
+          FISCAL STRIKE — Debt interest target reduced to 7%. Disciplined spending wins.
         </div>
       )}
 

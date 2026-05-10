@@ -62,22 +62,18 @@ export default function Home() {
   return (
     <main style={{ fontFamily: F, background: "#fff", color: "#1a1a1a" }}>
 
-      {/* HERO — editorial campaign-poster style */}
+      {/* HERO */}
       <section style={{
         minHeight: "100vh",
-        background: "#0a1628",
+        background: "linear-gradient(135deg, #050d2d 0%, #0a1f4d 35%, #0f2a5e 55%, #6b0e1a 85%, #9b1525 100%)",
         display: "flex", flexDirection: "column", justifyContent: "center",
         padding: "clamp(100px, 14vw, 140px) clamp(2rem, 8vw, 7rem) 60px",
         position: "relative", overflow: "hidden",
       }}>
-        {/* Subtle texture — horizontal rule pattern */}
-        <div style={{ position: "absolute", inset: 0, backgroundImage: "repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0 1px, transparent 1px 40px)", pointerEvents: "none" }} />
-        {/* Left gold rule */}
-        <div style={{ position: "absolute", left: "clamp(1.5rem, 7vw, 6rem)", top: 0, bottom: 0, width: "2px", background: "linear-gradient(180deg, transparent, #f5c518 20%, #f5c518 80%, transparent)", opacity: 0.55 }} />
-        {/* Red stripe block — bottom-right accent */}
-        <div style={{ position: "absolute", bottom: 0, right: 0, width: "38%", top: 0, backgroundImage: "repeating-linear-gradient(180deg, #b22234 0 18px, transparent 18px 36px)", opacity: 0.045, pointerEvents: "none" }} />
-
-        {mounted && <StarField count={55} goldRatio={0.12} seed={42} />}
+        {/* Radial gold glow — upper left */}
+        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 60% at 20% 30%, rgba(245,197,24,0.07) 0%, transparent 70%)", pointerEvents: "none" }} />
+        {/* Soft vignette bottom */}
+        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "35%", background: "linear-gradient(0deg, rgba(0,0,0,0.35) 0%, transparent 100%)", pointerEvents: "none" }} />
 
         <div style={{ position: "relative", zIndex: 1, maxWidth: "1000px" }}>
           {/* Eyebrow */}
@@ -134,6 +130,18 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* CONSTITUTION PREAMBLE TICKER */}
+      <div style={{ background: "#050d2d", padding: "14px 0", overflow: "hidden", borderTop: "1px solid rgba(245,197,24,0.2)", borderBottom: "1px solid rgba(245,197,24,0.2)" }}>
+        <div className="ticker-track">
+          {[0, 1].map((n) => (
+            <span key={n} style={{ display: "inline-block", whiteSpace: "nowrap", paddingRight: "6rem", color: "rgba(245,197,24,0.75)", fontSize: "clamp(11px, 1.3vw, 13px)", letterSpacing: "2.5px", textTransform: "uppercase", fontFamily: "var(--font-playfair), Georgia, serif", fontStyle: "italic" }}>
+              We the People of the United States, in Order to form a more perfect Union, establish Justice, insure domestic Tranquility, provide for the common defence, promote the general Welfare, and secure the Blessings of Liberty to ourselves and our Posterity, do ordain and establish this Constitution for the United States of America
+              <span style={{ color: "rgba(245,197,24,0.35)", margin: "0 2.5rem" }}>&#9733;</span>
+            </span>
+          ))}
+        </div>
+      </div>
 
       {/* EV TALLY */}
       <section style={{ background: NAVY, padding: "2.5rem 2rem" }} className="reveal">

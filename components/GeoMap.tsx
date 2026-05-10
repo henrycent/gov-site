@@ -124,7 +124,7 @@ export default function GeoMap() {
             <Geographies geography={GEO_URL}>
               {({ geographies }: { geographies: any[] }) =>
                 geographies.map((geo: any) => {
-                  const fips = String(geo.id);
+                  const fips = String(Number(geo.id));
                   const info = STATES[fips];
                   const isFocus = focusFips === fips;
                   return (

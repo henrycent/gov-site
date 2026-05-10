@@ -263,6 +263,17 @@ h1, h2, h3, h4, .serif { font-family: var(--font-serif), Georgia, "Times New Rom
 }
 .footer-link:hover { color: #f5c518; }
 
+/* Constitution preamble ticker */
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.ticker-track {
+  display: inline-flex;
+  animation: ticker-scroll 40s linear infinite;
+  will-change: transform;
+}
+
 /* Fighter jet flyby */
 @keyframes jet-fly {
   from { left: calc(100% + 20px); }
