@@ -31,22 +31,30 @@ function mulberry32(seed: number) {
 function TwinklingStars() {
   const stars = useMemo(() => {
     const rng = mulberry32(42);
-    return Array.from({ length: 55 }, () => ({
-      cx: 15 + rng() * 970,
-      cy: 15 + rng() * 670,
-      r:  3  + rng() * 7,
-      delay:    rng() * 4,
-      duration: 2 + rng() * 4,
-      gold: rng() < 0.12,
-    }));
+    const result: { cx: number; cy: number; r: number; delay: number; duration: number; gold: boolean }[] = [];
+    let attempts = 0;
+    while (result.length < 70 && attempts < 600) {
+      attempts++;
+      const cx = 15 + rng() * 970;
+      const cy = 15 + rng() * 670;
+      const r = 2.5 + rng() * 7;
+      const delay = rng() * 4;
+      const duration = 2 + rng() * 4;
+      const gold = rng() < 0.45;
+      // Keep stars away from the text column (left-center of hero)
+      if (cx < 740 && cy > 105 && cy < 595) continue;
+      result.push({ cx, cy, r, delay, duration, gold });
+    }
+    return result;
   }, []);
   return (
     <svg style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none" }}
          viewBox="0 0 1000 700" preserveAspectRatio="xMidYMid slice" aria-hidden>
       {stars.map((s, i) => (
         <polygon key={i} points={starPts(s.cx, s.cy, s.r)}
-          fill={s.gold ? "#f5c518" : "#fff"}
+          fill={s.gold ? "#f5c518" : "#e8e8ff"}
           style={{ transformBox: "fill-box", transformOrigin: "center",
+            opacity: s.gold ? 0.9 : 0.7,
             animation: `twinkle5 ${s.duration.toFixed(1)}s ease-in-out ${s.delay.toFixed(1)}s infinite` }}
         />
       ))}
