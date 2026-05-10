@@ -107,6 +107,84 @@ const BUDGET: BudgetItem[] = [
   },
 ];
 
+function polarToCart(cx: number, cy: number, r: number, deg: number) {
+  const rad = (deg - 90) * Math.PI / 180;
+  return { x: cx + r * Math.cos(rad), y: cy + r * Math.sin(rad) };
+}
+
+function SvgPie({ title, segments }: { title: string; segments: { label: string; pct: number; color: string }[] }) {
+  const cx = 130; const cy = 130; const outerR = 100; const innerR = 48;
+  let cursor = 0;
+  const slices = segments.map((s) => {
+    const start = cursor;
+    const sweep = (s.pct / 100) * 360;
+    cursor += sweep;
+    return { ...s, start, end: cursor };
+  });
+  return (
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
+      <p style={{ fontWeight: 700, color: NAVY, fontSize: 14, margin: 0, textAlign: "center", fontFamily: F }}>{title}</p>
+      <svg viewBox="0 0 260 260" width="220" height="220" aria-label={title}>
+        {slices.map((s) => {
+          const p1 = polarToCart(cx, cy, outerR, s.start);
+          const p2 = polarToCart(cx, cy, outerR, s.end);
+          const i1 = polarToCart(cx, cy, innerR, s.end);
+          const i2 = polarToCart(cx, cy, innerR, s.start);
+          const large = s.end - s.start > 180 ? 1 : 0;
+          const mid = (s.start + s.end) / 2;
+          const lp = polarToCart(cx, cy, outerR + 18, mid);
+          const d = `M${p1.x.toFixed(1)} ${p1.y.toFixed(1)} A${outerR} ${outerR} 0 ${large} 1 ${p2.x.toFixed(1)} ${p2.y.toFixed(1)} L${i1.x.toFixed(1)} ${i1.y.toFixed(1)} A${innerR} ${innerR} 0 ${large} 0 ${i2.x.toFixed(1)} ${i2.y.toFixed(1)} Z`;
+          return (
+            <g key={s.label}>
+              <path d={d} fill={s.color} stroke="#fff" strokeWidth="2" />
+              {s.pct >= 8 && (
+                <text x={lp.x.toFixed(1)} y={lp.y.toFixed(1)} textAnchor="middle"
+                  fontSize="9" fontWeight="700" fill={s.color}
+                  style={{ fontFamily: F }}>{s.pct}%</text>
+              )}
+            </g>
+          );
+        })}
+      </svg>
+      <div style={{ display: "flex", flexDirection: "column", gap: 5, width: "100%", maxWidth: 220 }}>
+        {segments.map((s) => (
+          <div key={s.label} style={{ display: "flex", alignItems: "center", gap: 7 }}>
+            <span style={{ width: 10, height: 10, borderRadius: 2, background: s.color, flexShrink: 0, display: "inline-block" }} />
+            <span style={{ fontSize: 11, color: "#555", lineHeight: 1.3 }}>{s.label} <strong style={{ color: NAVY }}>{s.pct}%</strong></span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+const PIE_COLORS = {
+  ss: "#4A6FA5",
+  mm: "#1D3461",
+  def: "#9B2335",
+  int: "#d4a017",
+  other: "#6b7280",
+  disc: "#065f46",
+};
+
+const CURRENT_SEGMENTS = [
+  { label: "Social Security",      pct: 21, color: PIE_COLORS.ss },
+  { label: "Medicare & Medicaid",  pct: 24, color: PIE_COLORS.mm },
+  { label: "National Defense",     pct: 13, color: PIE_COLORS.def },
+  { label: "Interest on Debt",     pct: 13, color: PIE_COLORS.int },
+  { label: "Other Mandatory",      pct: 18, color: PIE_COLORS.other },
+  { label: "Discretionary",        pct: 11, color: PIE_COLORS.disc },
+];
+
+const PROPOSED_SEGMENTS = [
+  { label: "Social Security",      pct: 19, color: PIE_COLORS.ss },
+  { label: "Medicare & Medicaid",  pct: 20, color: PIE_COLORS.mm },
+  { label: "National Defense",     pct: 19, color: PIE_COLORS.def },
+  { label: "Interest on Debt",     pct: 10, color: PIE_COLORS.int },
+  { label: "Other Mandatory",      pct: 16, color: PIE_COLORS.other },
+  { label: "Discretionary",        pct: 16, color: PIE_COLORS.disc },
+];
+
 function BudgetRow({ item, bombed }: { item: BudgetItem; bombed?: boolean }) {
   const [open, setOpen] = useState(false);
   const currentAmt = Math.round((TOTAL_B * item.currentPct) / 100);
@@ -368,6 +446,38 @@ export default function AdminPage() {
         </div>
       </section>
 
+      {/* BUREAUCRATIC VISION */}
+      <section style={{
+        background: "linear-gradient(135deg, #050d2d 0%, #0a2463 100%)",
+        color: "#fff", padding: "80px 2rem",
+      }}>
+        <div style={{ maxWidth: "760px", margin: "0 auto", textAlign: "center" }}>
+          <p style={{ color: "#f5c518", letterSpacing: "4px", fontSize: "12px", fontWeight: "700", margin: 0, textTransform: "uppercase" }}>Day One Message</p>
+          <h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", color: "#fff", marginTop: "0.5rem", fontFamily: F }}>Bureaucratic Vision</h2>
+          <div style={{ width: "50px", height: "3px", background: "#f5c518", margin: "1rem auto 1.5rem" }} />
+          <blockquote style={{
+            margin: 0, padding: "2rem 2.5rem",
+            borderLeft: "4px solid #f5c518",
+            background: "rgba(255,255,255,0.05)",
+            borderRadius: "0 8px 8px 0",
+            textAlign: "left",
+          }}>
+            <p style={{ fontSize: "clamp(15px, 1.8vw, 17px)", color: "rgba(255,255,255,0.9)", lineHeight: 1.9, fontStyle: "italic", margin: 0 }}>
+              &ldquo;The federal government works for the American people &mdash; not the other way around.
+              This administration enters office committed to a leaner, faster, and more accountable bureaucracy.
+              We will streamline the executive branch by consolidating redundant agencies, cutting administrative
+              overhead by 20% within two years, and restoring a culture of performance over tenure. Every department
+              will operate under a clear mission, a measurable budget, and a direct line of accountability to the
+              American taxpayer. We are not here to grow government. We are here to make government worthy of the
+              trust this nation has placed in it.&rdquo;
+            </p>
+            <footer style={{ marginTop: "1.25rem", color: "#f5c518", fontSize: "14px", fontWeight: "700", letterSpacing: "1px" }}>
+              &mdash; President Shumard, Day One Address to Federal Employees
+            </footer>
+          </blockquote>
+        </div>
+      </section>
+
       {/* CABINET */}
       <section style={{ background: "#f6f5f3", padding: "80px 2rem" }}>
         <div style={{ maxWidth: "980px", margin: "0 auto" }}>
@@ -442,6 +552,12 @@ export default function AdminPage() {
             <h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", color: NAVY, marginTop: "0.5rem", fontFamily: F }}>Federal Budget Proposal</h2>
             <div style={{ width: "50px", height: "3px", background: RED, margin: "1rem auto 0" }} />
             <p style={{ fontSize: "13px", color: "#888", marginTop: "1rem" }}>Click any category to see a detailed breakdown.</p>
+          </div>
+
+          {/* Pie charts */}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 32, marginBottom: "2.5rem", justifyItems: "center" }} className="reveal">
+            <SvgPie title="Current FY2028 Projected ($7.1T)" segments={CURRENT_SEGMENTS} />
+            <SvgPie title="Shumard / Centlivre Proposed" segments={PROPOSED_SEGMENTS} />
           </div>
 
           {/* Legend */}

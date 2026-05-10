@@ -132,6 +132,23 @@ export default function Home() {
         </div>
       </section>
 
+      {/* BUMPER STICKER */}
+      <div style={{ background: "#fff", padding: "18px 1.5rem", textAlign: "center" }}>
+        <div style={{
+          display: "inline-flex", alignItems: "stretch",
+          borderRadius: 8, overflow: "hidden",
+          border: "2px solid #b22234",
+          boxShadow: "0 4px 12px rgba(0,0,0,0.18), 0 1px 4px rgba(0,0,0,0.12)",
+        }}>
+          <div style={{ width: 14, background: "repeating-linear-gradient(180deg, #b22234 0 33%, #fff 33% 66%, #0a2463 66% 100%)" }} />
+          <div style={{ background: NAVY, padding: "10px 28px", display: "flex", flexDirection: "column", alignItems: "center", gap: 3 }}>
+            <span style={{ color: "#f5c518", fontWeight: 900, fontSize: "clamp(14px, 2.5vw, 20px)", letterSpacing: "3px", textTransform: "uppercase", fontFamily: F }}>SHUMARD &middot; CENTLIVRE 2028</span>
+            <span style={{ color: "rgba(255,255,255,0.75)", fontSize: "clamp(10px, 1.4vw, 13px)", fontStyle: "italic", letterSpacing: "2px" }}>Strength. Integrity. Together.</span>
+          </div>
+          <div style={{ width: 14, background: "repeating-linear-gradient(180deg, #b22234 0 33%, #fff 33% 66%, #0a2463 66% 100%)" }} />
+        </div>
+      </div>
+
       {/* CONSTITUTION PREAMBLE TICKER — parchment scroll */}
       <div style={{
         background: "linear-gradient(180deg, #f8edd2 0%, #e9cf8c 40%, #f2e0a8 70%, #e6c97a 100%)",

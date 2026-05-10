@@ -72,6 +72,58 @@ const PILLARS = [
     ],
   },
   {
+    title: "Abortion",
+    summary:
+      "Life is the first unalienable right. We support states' authority to protect it while championing adoption and alternatives that serve mothers and children alike.",
+    bullets: [
+      "Believe life begins at conception; support states' rights to set their own abortion laws post-Dobbs rather than imposing a federal mandate",
+      "Oppose all federal funding of abortion through Medicaid, Title X, or any other appropriation",
+      "Support federal exceptions for rape, incest, and life of the mother, leaving broader policy to the states",
+      "Champion adoption reform: streamline domestic adoption, reduce costs, and expand tax credits for adoptive families",
+      "Direct federal funding toward crisis pregnancy centers providing counseling, housing, and material support",
+      "Oppose late-term abortion and partial-birth abortion with no exceptions at the federal level",
+    ],
+  },
+  {
+    title: "Immigration",
+    summary:
+      "America is a nation of laws and a nation of immigrants — but a nation without borders is no nation at all. We will secure the border, fix the legal system, and restore order.",
+    bullets: [
+      "Fully secure the southern border through completion of the physical and technological barrier and tripling of Border Patrol agents",
+      "Implement a merit-based points system modeled on Canada and Australia, prioritizing skills, education, and economic contribution",
+      "End chain migration and the diversity visa lottery; prioritize nuclear family units and high-skill workers",
+      "Mandatory E-Verify for all employers nationwide with severe penalties for knowingly hiring undocumented workers",
+      "Fast-track asylum claim adjudication with binding 90-day deportation for denied claims",
+      "Create a legal guest-worker program for agriculture and seasonal industries with strict employer accountability",
+    ],
+  },
+  {
+    title: "Social Security & National Debt",
+    summary:
+      "We will honor our promises to retirees, modernize Social Security for younger workers, and end the reckless deficit spending that mortgages our children's future.",
+    bullets: [
+      "Protect full Social Security benefits for all current recipients and every worker within 10 years of retirement — no cuts, no means-testing",
+      "Raise the full retirement age to 68 for workers currently under 50, phased in gradually over 15 years",
+      "Allow younger workers to voluntarily invest up to 10% of their Social Security contribution in personal retirement accounts",
+      "Commit to a Balanced Budget Amendment targeting a primary surplus within 8 years through spending discipline",
+      "Cut discretionary spending by 15% across non-defense, non-entitlement accounts in the first term",
+      "Mandate a cost-benefit audit of every federal program every 5 years with automatic sunset for programs that fail review",
+    ],
+  },
+  {
+    title: "Taxes & Welfare",
+    summary:
+      "Keep more money in Americans' pockets, replace dependency-trap welfare with dignity and work, and simplify a tax code that punishes success and rewards lobbyists.",
+    bullets: [
+      "Make the 2017 Tax Cuts and Jobs Act provisions permanent and index all brackets to inflation going forward",
+      "Implement a flat 15% corporate rate with zero carve-outs, industry loopholes, or special-interest exemptions",
+      "Reform SNAP, Medicaid, and housing assistance to include work or job-training requirements for able-bodied adults without dependents",
+      "Consolidate 80+ overlapping federal welfare programs into 5 block grants to states, restoring local flexibility and accountability",
+      "Expand the Child Tax Credit to $3,500 per child, fully refundable for working families earning under $150,000",
+      "Eliminate the estate tax on family farms and small businesses transferred directly to heirs",
+    ],
+  },
+  {
     title: "Energy & Environment",
     summary:
       "Achieve full American energy dominance through an all-of-the-above approach — oil, gas, nuclear, and homegrown innovation — and stop depending on adversaries for the power that runs our lives.",
@@ -93,7 +145,7 @@ export default function PlatformPage() {
       <PageHero
         eyebrow="What we stand for"
         title="Our Platform"
-        subtitle="Six pillars. One unifying belief: America’s best days are ahead."
+        subtitle="Ten pillars. One unifying belief: America's best days are ahead. Our platform covers ten critical issue areas facing the country."
       />
 
       <section style={{ padding: "80px 1.5rem 96px" }}>
