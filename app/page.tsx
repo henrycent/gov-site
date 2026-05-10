@@ -80,7 +80,6 @@ export default function Home() {
         <div style={{ position: "relative", zIndex: 1, maxWidth: "1000px", margin: "0 auto", textAlign: "center" }}>
           {/* Eyebrow */}
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "12px", marginBottom: "2rem" }}>
-            <div style={{ width: "32px", height: "2px", background: "#f5c518" }} />
             <p style={{ color: "#f5c518", fontSize: "11px", letterSpacing: "6px", textTransform: "uppercase", margin: 0 }}>2028 Presidential Campaign</p>
           </div>
 
@@ -97,7 +96,6 @@ export default function Home() {
 
           {/* Divider with stars */}
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", margin: "0.4em 0" }}>
-            <div style={{ width: "48px", height: "2px", background: "#f5c518" }} />
             <span style={{ color: "#f5c518", fontSize: "13px", letterSpacing: "10px" }}>&#9733; &#9733; &#9733;</span>
           </div>
 
