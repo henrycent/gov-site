@@ -142,21 +142,32 @@ export default function Home() {
       }}>
         {/* aged paper grain overlay */}
         <div style={{ position: "absolute", inset: 0, backgroundImage: "repeating-linear-gradient(97deg, rgba(160,100,20,0.04) 0 1px, transparent 1px 6px), repeating-linear-gradient(4deg, rgba(180,120,30,0.03) 0 1px, transparent 1px 9px)", pointerEvents: "none" }} />
-        {/* Bumper sticker — absolutely centered, floats over scrolling text */}
-        <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", zIndex: 5, whiteSpace: "nowrap" }}>
-          <div style={{
-            display: "inline-flex", alignItems: "stretch",
-            borderRadius: 8, overflow: "hidden",
-            border: "2px solid #b22234",
-            boxShadow: "0 4px 18px rgba(0,0,0,0.28), 0 1px 4px rgba(0,0,0,0.15)",
-          }}>
-            <div style={{ width: 13, background: "repeating-linear-gradient(180deg, #b22234 0 33%, #fff 33% 66%, #0a2463 66% 100%)" }} />
-            <div style={{ background: NAVY, padding: "9px 26px", display: "flex", flexDirection: "column", alignItems: "center", gap: 3 }}>
-              <span style={{ color: "#f5c518", fontWeight: 900, fontSize: "clamp(14px, 2.5vw, 20px)", letterSpacing: "3px", textTransform: "uppercase", fontFamily: F }}>SHUMARD &middot; CENTLIVRE 2028</span>
-              <span style={{ color: "rgba(255,255,255,0.75)", fontSize: "clamp(10px, 1.4vw, 13px)", fontStyle: "italic", letterSpacing: "2px" }}>Strength. Integrity. Together.</span>
+        {/* Bumper sticker + fade strips — absolutely fills the section, flex-centered */}
+        <div style={{
+          position: "absolute", inset: 0,
+          display: "flex", alignItems: "center", justifyContent: "center",
+          zIndex: 4, pointerEvents: "none",
+        }}>
+          {/* Left fade */}
+          <div style={{ alignSelf: "stretch", width: "clamp(80px, 16vw, 220px)", flexShrink: 0, background: "linear-gradient(to right, transparent, rgba(234,208,142,0.97))" }} />
+          {/* Bumper sticker */}
+          <div style={{ flexShrink: 0, pointerEvents: "auto" }}>
+            <div style={{
+              display: "inline-flex", alignItems: "stretch",
+              borderRadius: 8, overflow: "hidden",
+              border: "2px solid #b22234",
+              boxShadow: "0 4px 18px rgba(0,0,0,0.28), 0 1px 4px rgba(0,0,0,0.15)",
+            }}>
+              <div style={{ width: 13, background: "repeating-linear-gradient(180deg, #b22234 0 33%, #fff 33% 66%, #0a2463 66% 100%)" }} />
+              <div style={{ background: NAVY, padding: "9px 26px", display: "flex", flexDirection: "column", alignItems: "center", gap: 3 }}>
+                <span style={{ color: "#f5c518", fontWeight: 900, fontSize: "clamp(14px, 2.5vw, 20px)", letterSpacing: "3px", textTransform: "uppercase", fontFamily: F }}>SHUMARD &middot; CENTLIVRE 2028</span>
+                <span style={{ color: "rgba(255,255,255,0.75)", fontSize: "clamp(10px, 1.4vw, 13px)", fontStyle: "italic", letterSpacing: "2px" }}>Strength. Integrity. Together.</span>
+              </div>
+              <div style={{ width: 13, background: "repeating-linear-gradient(180deg, #b22234 0 33%, #fff 33% 66%, #0a2463 66% 100%)" }} />
             </div>
-            <div style={{ width: 13, background: "repeating-linear-gradient(180deg, #b22234 0 33%, #fff 33% 66%, #0a2463 66% 100%)" }} />
           </div>
+          {/* Right fade */}
+          <div style={{ alignSelf: "stretch", width: "clamp(80px, 16vw, 220px)", flexShrink: 0, background: "linear-gradient(to left, transparent, rgba(234,208,142,0.97))" }} />
         </div>
         {/* Scrolling preamble */}
         <div className="ticker-track" style={{ position: "relative" }}>
