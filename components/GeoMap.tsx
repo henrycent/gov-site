@@ -229,7 +229,7 @@ export default function GeoMap() {
                           <span style={{ opacity: 0.85 }}>{label}</span>
                           <span style={{ fontWeight: 700 }}>{pct}%</span>
                         </div>
-                        <div style={{ height: 6, borderRadius: 3, background: "rgba(255,255,255,0.08)" }}>
+                        <div style={{ height: 6, borderRadius: 3, background: "rgba(255,255,255,0.18)", border: "1px solid rgba(255,255,255,0.28)" }}>
                           <div style={{ height: "100%", width: `${pct}%`, background: gradient, borderRadius: 3, transition: "width 0.45s ease" }} />
                         </div>
                       </div>

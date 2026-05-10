@@ -74,6 +74,19 @@ export default function Home() {
         <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 60% at 20% 30%, rgba(245,197,24,0.07) 0%, transparent 70%)", pointerEvents: "none" }} />
         {/* Soft vignette bottom */}
         <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "35%", background: "linear-gradient(0deg, rgba(0,0,0,0.35) 0%, transparent 100%)", pointerEvents: "none" }} />
+        {/* Flag-style 50 stars — upper right */}
+        <div style={{ position: "absolute", top: "clamp(86px, 10vw, 108px)", right: "clamp(2rem, 6vw, 5rem)", opacity: 0.22, pointerEvents: "none" }}>
+          <svg width="168" height="182" viewBox="0 0 168 182" aria-hidden>
+            {[6,5,6,5,6,5,6,5,6].flatMap((count, row) =>
+              Array.from({ length: count }, (_, col) => {
+                const xOff = count === 5 ? 14 : 0;
+                const x = col * 28 + xOff + 14;
+                const y = row * 20 + 12;
+                return <text key={`${row}-${col}`} x={x} y={y} fontSize={11} fill="#fff" textAnchor="middle" dominantBaseline="middle">★</text>;
+              })
+            )}
+          </svg>
+        </div>
 
         <div style={{ position: "relative", zIndex: 1, maxWidth: "1000px" }}>
           {/* Eyebrow */}
@@ -125,19 +138,29 @@ export default function Home() {
           </p>
 
           <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-            <Link href="/volunteer" className="btn-primary">Join Our Campaign</Link>
+            <Link href="/volunteer" className="btn-primary" style={{ background: "linear-gradient(180deg,#f2ede4,#ddd7ca)", color: "#0a1628", border: "2px solid #c8c2b4", boxShadow: "0 6px 0 rgba(0,0,0,0.28), 0 14px 30px rgba(0,0,0,0.35)" }}>Join Our Campaign</Link>
             <Link href="/platform" className="btn-ghost">Our Platform</Link>
           </div>
         </div>
       </section>
 
-      {/* CONSTITUTION PREAMBLE TICKER */}
-      <div style={{ background: "#050d2d", padding: "14px 0", overflow: "hidden", borderTop: "1px solid rgba(245,197,24,0.2)", borderBottom: "1px solid rgba(245,197,24,0.2)" }}>
-        <div className="ticker-track">
+      {/* CONSTITUTION PREAMBLE TICKER — parchment scroll */}
+      <div style={{
+        background: "linear-gradient(180deg, #f8edd2 0%, #e9cf8c 40%, #f2e0a8 70%, #e6c97a 100%)",
+        padding: "13px 0",
+        overflow: "hidden",
+        borderTop: "2px solid #b8923a",
+        borderBottom: "2px solid #b8923a",
+        boxShadow: "inset 0 2px 8px rgba(100,60,0,0.12), inset 0 -2px 8px rgba(100,60,0,0.12)",
+        position: "relative",
+      }}>
+        {/* aged paper grain overlay */}
+        <div style={{ position: "absolute", inset: 0, backgroundImage: "repeating-linear-gradient(97deg, rgba(160,100,20,0.04) 0 1px, transparent 1px 6px), repeating-linear-gradient(4deg, rgba(180,120,30,0.03) 0 1px, transparent 1px 9px)", pointerEvents: "none" }} />
+        <div className="ticker-track" style={{ position: "relative" }}>
           {[0, 1].map((n) => (
-            <span key={n} style={{ display: "inline-block", whiteSpace: "nowrap", paddingRight: "6rem", color: "rgba(245,197,24,0.75)", fontSize: "clamp(11px, 1.3vw, 13px)", letterSpacing: "2.5px", textTransform: "uppercase", fontFamily: "var(--font-playfair), Georgia, serif", fontStyle: "italic" }}>
+            <span key={n} style={{ display: "inline-block", whiteSpace: "nowrap", paddingRight: "5rem", color: "rgba(72,38,6,0.82)", fontSize: "clamp(11px, 1.3vw, 13px)", letterSpacing: "2px", fontFamily: "var(--font-playfair), Georgia, serif", fontStyle: "italic" }}>
               We the People of the United States, in Order to form a more perfect Union, establish Justice, insure domestic Tranquility, provide for the common defence, promote the general Welfare, and secure the Blessings of Liberty to ourselves and our Posterity, do ordain and establish this Constitution for the United States of America
-              <span style={{ color: "rgba(245,197,24,0.35)", margin: "0 2.5rem" }}>&#9733;</span>
+              <span style={{ color: "rgba(120,70,10,0.4)", margin: "0 2rem" }}>&#9733;</span>
             </span>
           ))}
         </div>
