@@ -142,13 +142,13 @@ export default function Home() {
       }}>
         {/* aged paper grain overlay */}
         <div style={{ position: "absolute", inset: 0, backgroundImage: "repeating-linear-gradient(97deg, rgba(160,100,20,0.04) 0 1px, transparent 1px 6px), repeating-linear-gradient(4deg, rgba(180,120,30,0.03) 0 1px, transparent 1px 9px)", pointerEvents: "none" }} />
-        {/* Bumper sticker centered over parchment */}
-        <div style={{ textAlign: "center", marginBottom: "16px", position: "relative" }}>
+        {/* Bumper sticker — absolutely centered, floats over scrolling text */}
+        <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", zIndex: 5, whiteSpace: "nowrap" }}>
           <div style={{
             display: "inline-flex", alignItems: "stretch",
             borderRadius: 8, overflow: "hidden",
             border: "2px solid #b22234",
-            boxShadow: "0 4px 14px rgba(0,0,0,0.22), 0 1px 4px rgba(0,0,0,0.14)",
+            boxShadow: "0 4px 18px rgba(0,0,0,0.28), 0 1px 4px rgba(0,0,0,0.15)",
           }}>
             <div style={{ width: 13, background: "repeating-linear-gradient(180deg, #b22234 0 33%, #fff 33% 66%, #0a2463 66% 100%)" }} />
             <div style={{ background: NAVY, padding: "9px 26px", display: "flex", flexDirection: "column", alignItems: "center", gap: 3 }}>
@@ -158,24 +158,15 @@ export default function Home() {
             <div style={{ width: 13, background: "repeating-linear-gradient(180deg, #b22234 0 33%, #fff 33% 66%, #0a2463 66% 100%)" }} />
           </div>
         </div>
-        {/* Preamble text */}
-        <p style={{
-          position: "relative",
-          textAlign: "center",
-          margin: "0 auto",
-          padding: "0 clamp(1.5rem, 7vw, 7rem)",
-          color: "rgba(72,38,6,0.85)",
-          fontSize: "clamp(18px, 2.4vw, 26px)",
-          letterSpacing: "1.5px",
-          fontFamily: "var(--font-playfair), Georgia, serif",
-          fontStyle: "italic",
-          lineHeight: 1.65,
-        }}>
-          We the People of the United States, in Order to form a more perfect Union, establish Justice,
-          insure domestic Tranquility, provide for the common defence, promote the general Welfare,
-          and secure the Blessings of Liberty to ourselves and our Posterity, do ordain and establish
-          this Constitution for the United States of America.
-        </p>
+        {/* Scrolling preamble */}
+        <div className="ticker-track" style={{ position: "relative" }}>
+          {[0, 1].map((n) => (
+            <span key={n} style={{ display: "inline-block", whiteSpace: "nowrap", paddingRight: "5rem", color: "rgba(72,38,6,0.82)", fontSize: "clamp(18px, 2.4vw, 26px)", letterSpacing: "2px", fontFamily: "var(--font-playfair), Georgia, serif", fontStyle: "italic" }}>
+              We the People of the United States, in Order to form a more perfect Union, establish Justice, insure domestic Tranquility, provide for the common defence, promote the general Welfare, and secure the Blessings of Liberty to ourselves and our Posterity, do ordain and establish this Constitution for the United States of America
+              <span style={{ color: "rgba(120,70,10,0.4)", margin: "0 2rem" }}>&#9733;</span>
+            </span>
+          ))}
+        </div>
       </div>
 
       {/* EV TALLY */}
