@@ -153,6 +153,7 @@ export default function PlatformPage() {
           {PILLARS.map((p, i) => (
             <article
               key={p.title}
+              className="pillar-card"
               style={{
                 background: "#fff",
                 border: "1px solid #e3e3ea",
@@ -189,6 +190,7 @@ export default function PlatformPage() {
                 {p.bullets.map((b, bi) => (
                   <li
                     key={bi}
+                    className="pillar-bullet"
                     style={{
                       display: "flex",
                       alignItems: "flex-start",
@@ -199,7 +201,7 @@ export default function PlatformPage() {
                       borderLeft: `3px solid ${i % 2 === 0 ? "#b22234" : "#0a2463"}`,
                     }}
                   >
-                    <span style={{ color: "#f5c518", fontSize: 18, marginTop: -1 }}>★</span>
+                    <span className="pillar-bullet-star" style={{ color: "#f5c518", fontSize: 18, marginTop: -1 }}>★</span>
                     <span style={{ color: "#0c1024", fontSize: 14, lineHeight: 1.5 }}>{b}</span>
                   </li>
                 ))}

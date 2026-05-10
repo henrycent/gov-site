@@ -12,7 +12,7 @@ export default function SiteFooter() {
 
 
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 1.5rem" }}>
-        <div style={{
+        <div className="footer-grid" style={{
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
           gap: 40, marginBottom: 48,

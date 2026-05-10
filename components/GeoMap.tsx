@@ -82,21 +82,21 @@ export default function GeoMap() {
   return (
     <div style={{ width: "100%" }}>
       {/* EV tally bar */}
-      <div style={{
+      <div className="ev-tally" style={{
         display: "flex", alignItems: "stretch", marginBottom: 24,
         borderRadius: 8, overflow: "hidden", border: "2px solid #0a2463",
         boxShadow: "0 8px 24px rgba(10,36,99,0.18)",
       }}>
         <div style={{ flex: 291, background: "linear-gradient(90deg, #7a0f1f, #b22234)", padding: "18px 20px", color: "#fff" }}>
           <div style={{ fontSize: 10, letterSpacing: 3, opacity: 0.9 }}>SHUMARD / CENTLIVRE</div>
-          <div style={{ fontSize: 36, fontWeight: 900 }}>
+          <div className="ev-number" style={{ fontSize: 36, fontWeight: 900 }}>
             291 <span style={{ fontSize: 14, fontWeight: 500, opacity: 0.85 }}>EV</span>
           </div>
         </div>
         <div style={{ width: 4, background: "repeating-linear-gradient(180deg, #f5c518 0 8px, #fff 8px 16px)" }} />
         <div style={{ flex: 247, background: "linear-gradient(90deg, #1d3893, #0a2463)", padding: "18px 20px", color: "#fff", textAlign: "right" }}>
           <div style={{ fontSize: 10, letterSpacing: 3, opacity: 0.9 }}>HOWELL / RIVERA</div>
-          <div style={{ fontSize: 36, fontWeight: 900 }}>
+          <div className="ev-number" style={{ fontSize: 36, fontWeight: 900 }}>
             247 <span style={{ fontSize: 14, fontWeight: 500, opacity: 0.85 }}>EV</span>
           </div>
         </div>
@@ -107,7 +107,7 @@ export default function GeoMap() {
       </div>
 
       {/* Map + sidebar */}
-      <div style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(0,300px)", gap: 24, alignItems: "start" }}>
+      <div className="map-grid" style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(0,300px)", gap: 24, alignItems: "start" }}>
         {/* Map */}
         <div style={{
           background: "linear-gradient(180deg, #f7f3e8, #fff)",

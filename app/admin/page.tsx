@@ -486,7 +486,7 @@ export default function AdminPage() {
             <h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", color: NAVY, marginTop: "0.5rem", fontFamily: F }}>Cabinet Selections</h2>
             <div style={{ width: "50px", height: "3px", background: RED, margin: "1rem auto 0" }} />
           </div>
-          <div style={{ overflowX: "auto", borderRadius: "8px", border: "1px solid #e4e2de", boxShadow: "0 4px 16px rgba(0,0,0,0.05)" }} className="reveal">
+          <div className="cabinet-scroll reveal" style={{ borderRadius: "8px", border: "1px solid #e4e2de", boxShadow: "0 4px 16px rgba(0,0,0,0.05)" }}>
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "14px" }}>
               <thead>
                 <tr style={{ background: NAVY, color: "#fff" }}>

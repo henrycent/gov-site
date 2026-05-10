@@ -64,7 +64,7 @@ export default function Home() {
     <main style={{ background: "#fff", color: "#1a1a1a" }}>
 
       {/* HERO */}
-      <section style={{
+      <section className="hero-section" style={{
         minHeight: "100vh",
         background: "linear-gradient(135deg, #050d2d 0%, #0a1f4d 35%, #0f2a5e 55%, #6b0e1a 85%, #9b1525 100%)",
         display: "flex", flexDirection: "column", justifyContent: "center",
@@ -174,14 +174,14 @@ export default function Home() {
           <p style={{ color: "rgba(255,255,255,0.45)", fontSize: "11px", letterSpacing: "4px", textAlign: "center", marginBottom: "1rem", textTransform: "uppercase" }}>
             2028 Electoral College Projection
           </p>
-          <div style={{ display: "flex", borderRadius: "6px", overflow: "hidden", border: "2px solid #f5c518", boxShadow: "0 8px 24px rgba(0,0,0,0.3)" }}>
+          <div className="ev-tally" style={{ display: "flex", borderRadius: "6px", overflow: "hidden", border: "2px solid #f5c518", boxShadow: "0 8px 24px rgba(0,0,0,0.3)" }}>
             <div style={{ flex: 291, background: "linear-gradient(90deg, #7a0f1f, #b22234)", padding: "1.25rem 2rem", color: "#fff" }}>
               <div style={{ fontSize: "10px", letterSpacing: "2px", opacity: 0.85 }}>SHUMARD / CENTLIVRE</div>
-              <div style={{ fontSize: "2.8rem", fontWeight: "900", fontFamily: F, lineHeight: 1 }}>291 <span style={{ fontSize: "14px", fontWeight: "500" }}>EV</span></div>
+              <div className="ev-number" style={{ fontSize: "2.8rem", fontWeight: "900", fontFamily: F, lineHeight: 1 }}>291 <span style={{ fontSize: "14px", fontWeight: "500" }}>EV</span></div>
             </div>
             <div style={{ flex: 247, background: "linear-gradient(90deg, #1d3893, #0a2463)", padding: "1.25rem 2rem", color: "#fff", textAlign: "right" }}>
               <div style={{ fontSize: "10px", letterSpacing: "2px", opacity: 0.85 }}>HOWELL / RIVERA</div>
-              <div style={{ fontSize: "2.8rem", fontWeight: "900", fontFamily: F, lineHeight: 1 }}>247 <span style={{ fontSize: "14px", fontWeight: "500" }}>EV</span></div>
+              <div className="ev-number" style={{ fontSize: "2.8rem", fontWeight: "900", fontFamily: F, lineHeight: 1 }}>247 <span style={{ fontSize: "14px", fontWeight: "500" }}>EV</span></div>
             </div>
           </div>
           <p style={{ textAlign: "center", color: "rgba(255,255,255,0.4)", fontSize: "11px", marginTop: "0.6rem", letterSpacing: "2px" }}>
