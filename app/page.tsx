@@ -1,66 +1,10 @@
 "use client";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import StarField from "@/components/StarField";
 
 const F = "var(--font-inter), system-ui, -apple-system, sans-serif";
 
-function starPts(cx: number, cy: number, r: number): string {
-  const inner = r * 0.42;
-  let s = "";
-  for (let k = 0; k < 5; k++) {
-    const oa = (k * 72 - 90) * Math.PI / 180;
-    const ia = ((k * 72 + 36) - 90) * Math.PI / 180;
-    s += `${(cx + r * Math.cos(oa)).toFixed(1)},${(cy + r * Math.sin(oa)).toFixed(1)} `;
-    s += `${(cx + inner * Math.cos(ia)).toFixed(1)},${(cy + inner * Math.sin(ia)).toFixed(1)} `;
-  }
-  return s.trim();
-}
-
-function mulberry32(seed: number) {
-  let a = seed >>> 0;
-  return () => {
-    a = (a + 0x6d2b79f5) >>> 0;
-    let t = a;
-    t = Math.imul(t ^ (t >>> 15), t | 1);
-    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
-
-function TwinklingStars() {
-  const stars = useMemo(() => {
-    const rng = mulberry32(42);
-    const result: { cx: number; cy: number; r: number; delay: number; duration: number; gold: boolean }[] = [];
-    let attempts = 0;
-    while (result.length < 70 && attempts < 600) {
-      attempts++;
-      const cx = 15 + rng() * 970;
-      const cy = 15 + rng() * 670;
-      const r = 2.5 + rng() * 7;
-      const delay = rng() * 4;
-      const duration = 2 + rng() * 4;
-      const gold = rng() < 0.45;
-      // Keep stars away from the text column (left-center of hero)
-      if (cx < 740 && cy > 105 && cy < 595) continue;
-      result.push({ cx, cy, r, delay, duration, gold });
-    }
-    return result;
-  }, []);
-  return (
-    <svg style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none" }}
-         viewBox="0 0 1000 700" preserveAspectRatio="xMidYMid slice" aria-hidden>
-      {stars.map((s, i) => (
-        <polygon key={i} points={starPts(s.cx, s.cy, s.r)}
-          fill={s.gold ? "#f5c518" : "#e8e8ff"}
-          style={{ transformBox: "fill-box", transformOrigin: "center",
-            opacity: s.gold ? 0.9 : 0.7,
-            animation: `twinkle5 ${s.duration.toFixed(1)}s ease-in-out ${s.delay.toFixed(1)}s infinite` }}
-        />
-      ))}
-    </svg>
-  );
-}
 const RED = "#9B2335";
 const NAVY = "#1D3461";
 
@@ -131,8 +75,7 @@ export default function Home() {
         <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 60% at 20% 30%, rgba(245,197,24,0.07) 0%, transparent 70%)", pointerEvents: "none" }} />
         {/* Soft vignette bottom */}
         <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "35%", background: "linear-gradient(0deg, rgba(0,0,0,0.35) 0%, transparent 100%)", pointerEvents: "none" }} />
-        {/* 55 twinkling five-pointed stars */}
-        {mounted && <TwinklingStars />}
+        {mounted && <StarField count={100} goldRatio={0.15} />}
 
         <div style={{ position: "relative", zIndex: 1, maxWidth: "1000px" }}>
           {/* Eyebrow */}
