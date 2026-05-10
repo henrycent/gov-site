@@ -50,7 +50,7 @@ html, body {
   .hamburger { display: block !important; }
 }
 
-h1, h2, h3, h4, .serif { font-family: var(--font-playfair), Georgia, serif; }
+h1, h2, h3, h4, .serif { font-family: var(--font-inter), system-ui, -apple-system, sans-serif; }
 
 ::selection { background: var(--gold); color: var(--ink); }
 

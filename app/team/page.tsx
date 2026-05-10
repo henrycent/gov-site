@@ -83,7 +83,6 @@ export default function TeamPage() {
                       background: "radial-gradient(circle at 30% 30%, #fff 0%, #f5c518 60%, #c79a16 100%)",
                       display: "flex", alignItems: "center", justifyContent: "center",
                       color: p.accent, fontWeight: 900, fontSize: 30,
-                      fontFamily: "var(--font-playfair), Georgia, serif",
                       border: "4px solid #fff",
                       boxShadow: "0 0 0 3px #f5c518, 0 8px 20px rgba(0,0,0,0.3)",
                       flexShrink: 0,

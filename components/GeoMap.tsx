@@ -89,14 +89,14 @@ export default function GeoMap() {
       }}>
         <div style={{ flex: 291, background: "linear-gradient(90deg, #7a0f1f, #b22234)", padding: "18px 20px", color: "#fff" }}>
           <div style={{ fontSize: 10, letterSpacing: 3, opacity: 0.9 }}>SHUMARD / CENTLIVRE</div>
-          <div style={{ fontSize: 36, fontWeight: 900, fontFamily: "var(--font-playfair), Georgia, serif" }}>
+          <div style={{ fontSize: 36, fontWeight: 900 }}>
             291 <span style={{ fontSize: 14, fontWeight: 500, opacity: 0.85 }}>EV</span>
           </div>
         </div>
         <div style={{ width: 4, background: "repeating-linear-gradient(180deg, #f5c518 0 8px, #fff 8px 16px)" }} />
         <div style={{ flex: 247, background: "linear-gradient(90deg, #1d3893, #0a2463)", padding: "18px 20px", color: "#fff", textAlign: "right" }}>
           <div style={{ fontSize: 10, letterSpacing: 3, opacity: 0.9 }}>HOWELL / RIVERA</div>
-          <div style={{ fontSize: 36, fontWeight: 900, fontFamily: "var(--font-playfair), Georgia, serif" }}>
+          <div style={{ fontSize: 36, fontWeight: 900 }}>
             247 <span style={{ fontSize: 14, fontWeight: 500, opacity: 0.85 }}>EV</span>
           </div>
         </div>
@@ -163,7 +163,6 @@ export default function GeoMap() {
               padding: "6px 13px", borderRadius: 6, fontSize: 13,
               pointerEvents: "none", zIndex: 999, whiteSpace: "nowrap",
               border: "1px solid rgba(245,197,24,0.4)", backdropFilter: "blur(4px)",
-              fontFamily: "var(--font-playfair), Georgia, serif",
             }}>
               <strong>{STATES[tooltip.fips].name}</strong>
               {" — "}{STATES[tooltip.fips].ev} EV
@@ -194,7 +193,7 @@ export default function GeoMap() {
           {focus ? (
             <div className="fade-up" key={focusFips}>
               <div style={{ fontSize: 11, letterSpacing: 3, color: "#f5c518" }}>SELECTED STATE</div>
-              <h3 style={{ margin: "8px 0 4px", fontSize: 26, fontFamily: "var(--font-playfair), Georgia, serif" }}>{focus.name}</h3>
+              <h3 style={{ margin: "8px 0 4px", fontSize: 26 }}>{focus.name}</h3>
               <div style={{ fontSize: 13, color: "rgba(255,255,255,0.65)", marginBottom: 18 }}>
                 {focus.abbr} · {focus.ev} Electoral Votes
               </div>
@@ -251,7 +250,7 @@ export default function GeoMap() {
           ) : (
             <div>
               <div style={{ fontSize: 11, letterSpacing: 3, color: "#f5c518" }}>★ FINAL RESULT</div>
-              <h3 style={{ margin: "8px 0", fontSize: 24, fontFamily: "var(--font-playfair), Georgia, serif" }}>A Decisive Mandate</h3>
+              <h3 style={{ margin: "8px 0", fontSize: 24 }}>A Decisive Mandate</h3>
               <p style={{ fontSize: 13, lineHeight: 1.75, color: "rgba(255,255,255,0.65)" }}>
                 Shumard / Centlivre carries 291 electoral votes. Hover any state to preview results, or click to pin the detail view.
               </p>

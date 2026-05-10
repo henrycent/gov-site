@@ -52,7 +52,7 @@ export default function SiteNav() {
         <Link href="/" style={{ display: "flex", alignItems: "center", gap: 14, textDecoration: "none" }}>
           <SealLogo />
           <div style={{ lineHeight: 1.1 }}>
-            <div style={{ color: "#fff", fontSize: 17, fontWeight: 800, letterSpacing: 0.5, fontFamily: "var(--font-playfair), Georgia, serif" }}>
+            <div style={{ color: "#fff", fontSize: 17, fontWeight: 800, letterSpacing: 0.5, }}>
               SHUMARD <span style={{ color: "#f5c518" }}>/</span> CENTLIVRE
             </div>
             <div style={{ color: "rgba(255,255,255,0.6)", fontSize: 10, letterSpacing: 4, marginTop: 2 }}>2028 · UNITED STATES</div>

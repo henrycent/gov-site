@@ -19,7 +19,6 @@ export default function SiteFooter() {
         }}>
           <div>
             <div style={{
-              fontFamily: "var(--font-playfair), Georgia, serif",
               fontSize: 22, fontWeight: 900, color: "#fff", marginBottom: 14, letterSpacing: 1,
             }}>
               SHUMARD <span style={{ color: "#f5c518" }}>/</span> CENTLIVRE

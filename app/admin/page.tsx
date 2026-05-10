@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import StarField from "@/components/StarField";
 
-const F = "var(--font-playfair), Georgia, serif";
+const F = "var(--font-inter), system-ui, -apple-system, sans-serif";
 const RED = "#9B2335";
 const NAVY = "#1D3461";
 const TOTAL_B = 7100;

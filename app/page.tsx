@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import StarField from "@/components/StarField";
 
-const F = "var(--font-playfair), Georgia, serif";
+const F = "var(--font-inter), system-ui, -apple-system, sans-serif";
 
 function starPts(cx: number, cy: number, r: number): string {
   const inner = r * 0.42;
@@ -58,11 +58,20 @@ const HIGHLIGHTS = [
   },
 ];
 
+type Star = { cx: number; cy: number; r: number; op: number };
+
 export default function Home() {
   const [mounted, setMounted] = useState(false);
+  const [stars, setStars] = useState<Star[]>([]);
 
   useEffect(() => {
     setMounted(true);
+    setStars(Array.from({ length: 55 }, () => ({
+      cx: 15 + Math.random() * 970,
+      cy: 15 + Math.random() * 670,
+      r:  3 + Math.random() * 7,
+      op: 0.05 + Math.random() * 0.45,
+    })));
     const io = new IntersectionObserver(
       (es) => es.forEach((e) => { if (e.isIntersecting) e.target.classList.add("revealed"); }),
       { threshold: 0.08, rootMargin: "0px 0px -40px 0px" }
@@ -86,23 +95,17 @@ export default function Home() {
         <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 60% at 20% 30%, rgba(245,197,24,0.07) 0%, transparent 70%)", pointerEvents: "none" }} />
         {/* Soft vignette bottom */}
         <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "35%", background: "linear-gradient(0deg, rgba(0,0,0,0.35) 0%, transparent 100%)", pointerEvents: "none" }} />
-        {/* 50 five-pointed stars spread across hero */}
-        {mounted && (
+        {/* 55 five-pointed stars — random positions, varying brightness */}
+        {mounted && stars.length > 0 && (
           <svg
             style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none" }}
             viewBox="0 0 1000 700"
             preserveAspectRatio="xMidYMid slice"
             aria-hidden
           >
-            {Array.from({ length: 50 }, (_, i) => {
-              const hx = Math.abs(Math.sin(i * 127.1 + 1.3) * 43758.5453) % 1;
-              const hy = Math.abs(Math.sin(i * 311.7 + 4.9) * 43758.5453) % 1;
-              const cx = 15 + hx * 970;
-              const cy = 15 + hy * 670;
-              const r  = 3.5 + hx * 5.5;
-              const op = 0.1 + hy * 0.22;
-              return <polygon key={i} points={starPts(cx, cy, r)} fill="#fff" opacity={op} />;
-            })}
+            {stars.map((s, i) => (
+              <polygon key={i} points={starPts(s.cx, s.cy, s.r)} fill="#fff" opacity={s.op} />
+            ))}
           </svg>
         )}
 
