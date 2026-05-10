@@ -127,31 +127,9 @@ export default function Home() {
             <Link href="/volunteer" className="btn-primary" style={{ background: "linear-gradient(180deg,#f2ede4,#ddd7ca)", color: "#0a1628", border: "2px solid #c8c2b4", boxShadow: "0 6px 0 rgba(0,0,0,0.28), 0 14px 30px rgba(0,0,0,0.35)" }}>Join Our Campaign</Link>
             <Link href="/platform" className="btn-ghost">Our Platform</Link>
           </div>
-        </div>
-      </section>
 
-      {/* CONSTITUTION PREAMBLE TICKER + BUMPER STICKER — parchment scroll */}
-      <div style={{
-        background: "linear-gradient(180deg, #f8edd2 0%, #e9cf8c 40%, #f2e0a8 70%, #e6c97a 100%)",
-        padding: "22px 0 18px",
-        overflow: "hidden",
-        borderTop: "2px solid #b8923a",
-        borderBottom: "2px solid #b8923a",
-        boxShadow: "inset 0 2px 8px rgba(100,60,0,0.12), inset 0 -2px 8px rgba(100,60,0,0.12)",
-        position: "relative",
-      }}>
-        {/* aged paper grain overlay */}
-        <div style={{ position: "absolute", inset: 0, backgroundImage: "repeating-linear-gradient(97deg, rgba(160,100,20,0.04) 0 1px, transparent 1px 6px), repeating-linear-gradient(4deg, rgba(180,120,30,0.03) 0 1px, transparent 1px 9px)", pointerEvents: "none" }} />
-        {/* Bumper sticker + fade strips — absolutely fills the section, flex-centered */}
-        <div style={{
-          position: "absolute", inset: 0,
-          display: "flex", alignItems: "center", justifyContent: "center",
-          zIndex: 4, pointerEvents: "none",
-        }}>
-          {/* Left fade */}
-          <div style={{ alignSelf: "stretch", width: "clamp(80px, 16vw, 220px)", flexShrink: 0, background: "linear-gradient(to right, transparent, rgba(234,208,142,0.97))" }} />
           {/* Bumper sticker */}
-          <div style={{ flexShrink: 0, pointerEvents: "auto" }}>
+          <div style={{ marginTop: "2.5rem" }}>
             <div style={{
               display: "inline-flex", alignItems: "stretch",
               borderRadius: 8, overflow: "hidden",
@@ -166,10 +144,20 @@ export default function Home() {
               <div style={{ width: 13, background: "repeating-linear-gradient(180deg, #b22234 0 33%, #fff 33% 66%, #0a2463 66% 100%)" }} />
             </div>
           </div>
-          {/* Right fade */}
-          <div style={{ alignSelf: "stretch", width: "clamp(80px, 16vw, 220px)", flexShrink: 0, background: "linear-gradient(to left, transparent, rgba(234,208,142,0.97))" }} />
         </div>
-        {/* Scrolling preamble */}
+      </section>
+
+      {/* CONSTITUTION PREAMBLE TICKER — parchment scroll */}
+      <div style={{
+        background: "linear-gradient(180deg, #f8edd2 0%, #e9cf8c 40%, #f2e0a8 70%, #e6c97a 100%)",
+        padding: "18px 0",
+        overflow: "hidden",
+        borderTop: "2px solid #b8923a",
+        borderBottom: "2px solid #b8923a",
+        boxShadow: "inset 0 2px 8px rgba(100,60,0,0.12), inset 0 -2px 8px rgba(100,60,0,0.12)",
+        position: "relative",
+      }}>
+        <div style={{ position: "absolute", inset: 0, backgroundImage: "repeating-linear-gradient(97deg, rgba(160,100,20,0.04) 0 1px, transparent 1px 6px), repeating-linear-gradient(4deg, rgba(180,120,30,0.03) 0 1px, transparent 1px 9px)", pointerEvents: "none" }} />
         <div className="ticker-track" style={{ position: "relative" }}>
           {[0, 1].map((n) => (
             <span key={n} style={{ display: "inline-block", whiteSpace: "nowrap", paddingRight: "5rem", color: "rgba(72,38,6,0.82)", fontSize: "clamp(18px, 2.4vw, 26px)", letterSpacing: "2px", fontFamily: "var(--font-playfair), Georgia, serif", fontStyle: "italic" }}>
