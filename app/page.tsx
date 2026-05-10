@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import Link from "next/link";
 import StarField from "@/components/StarField";
 
@@ -15,6 +15,43 @@ function starPts(cx: number, cy: number, r: number): string {
     s += `${(cx + inner * Math.cos(ia)).toFixed(1)},${(cy + inner * Math.sin(ia)).toFixed(1)} `;
   }
   return s.trim();
+}
+
+function mulberry32(seed: number) {
+  let a = seed >>> 0;
+  return () => {
+    a = (a + 0x6d2b79f5) >>> 0;
+    let t = a;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function TwinklingStars() {
+  const stars = useMemo(() => {
+    const rng = mulberry32(42);
+    return Array.from({ length: 55 }, () => ({
+      cx: 15 + rng() * 970,
+      cy: 15 + rng() * 670,
+      r:  3  + rng() * 7,
+      delay:    rng() * 4,
+      duration: 2 + rng() * 4,
+      gold: rng() < 0.12,
+    }));
+  }, []);
+  return (
+    <svg style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none" }}
+         viewBox="0 0 1000 700" preserveAspectRatio="xMidYMid slice" aria-hidden>
+      {stars.map((s, i) => (
+        <polygon key={i} points={starPts(s.cx, s.cy, s.r)}
+          fill={s.gold ? "#f5c518" : "#fff"}
+          style={{ transformBox: "fill-box", transformOrigin: "center",
+            animation: `twinkle5 ${s.duration.toFixed(1)}s ease-in-out ${s.delay.toFixed(1)}s infinite` }}
+        />
+      ))}
+    </svg>
+  );
 }
 const RED = "#9B2335";
 const NAVY = "#1D3461";
@@ -58,20 +95,11 @@ const HIGHLIGHTS = [
   },
 ];
 
-type Star = { cx: number; cy: number; r: number; op: number };
-
 export default function Home() {
   const [mounted, setMounted] = useState(false);
-  const [stars, setStars] = useState<Star[]>([]);
 
   useEffect(() => {
     setMounted(true);
-    setStars(Array.from({ length: 55 }, () => ({
-      cx: 15 + Math.random() * 970,
-      cy: 15 + Math.random() * 670,
-      r:  3 + Math.random() * 7,
-      op: 0.05 + Math.random() * 0.45,
-    })));
     const io = new IntersectionObserver(
       (es) => es.forEach((e) => { if (e.isIntersecting) e.target.classList.add("revealed"); }),
       { threshold: 0.08, rootMargin: "0px 0px -40px 0px" }
@@ -95,19 +123,8 @@ export default function Home() {
         <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 60% at 20% 30%, rgba(245,197,24,0.07) 0%, transparent 70%)", pointerEvents: "none" }} />
         {/* Soft vignette bottom */}
         <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "35%", background: "linear-gradient(0deg, rgba(0,0,0,0.35) 0%, transparent 100%)", pointerEvents: "none" }} />
-        {/* 55 five-pointed stars — random positions, varying brightness */}
-        {mounted && stars.length > 0 && (
-          <svg
-            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none" }}
-            viewBox="0 0 1000 700"
-            preserveAspectRatio="xMidYMid slice"
-            aria-hidden
-          >
-            {stars.map((s, i) => (
-              <polygon key={i} points={starPts(s.cx, s.cy, s.r)} fill="#fff" opacity={s.op} />
-            ))}
-          </svg>
-        )}
+        {/* 55 twinkling five-pointed stars */}
+        {mounted && <TwinklingStars />}
 
         <div style={{ position: "relative", zIndex: 1, maxWidth: "1000px" }}>
           {/* Eyebrow */}

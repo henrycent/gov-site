@@ -263,6 +263,12 @@ h1, h2, h3, h4, .serif { font-family: var(--font-inter), system-ui, -apple-syste
 }
 .footer-link:hover { color: #f5c518; }
 
+/* Twinkling 5-pointed star animation */
+@keyframes twinkle5 {
+  0%, 100% { opacity: 0.12; transform: scale(1); }
+  50%       { opacity: 1;    transform: scale(1.35); }
+}
+
 /* Constitution preamble ticker */
 @keyframes ticker-scroll {
   0%   { transform: translateX(0); }

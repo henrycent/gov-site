@@ -2,75 +2,87 @@ import Link from "next/link";
 
 const PILLARS = [
   {
-    icon: "🏭",
     title: "Economy & Jobs",
     summary:
-      "Restore American manufacturing, cut taxes on working families, and reward small businesses for hiring.",
+      "Restore American manufacturing, cut taxes on working families, and build an economy where every worker can get ahead without government permission.",
     bullets: [
-      "Permanent middle-class tax cut indexed to inflation",
-      "Reshore critical supply chains in semiconductors, pharma, and steel",
-      "Slash federal regulations strangling Main Street",
-      "Apprenticeship-first jobs program in every state",
+      "Permanent middle-class tax cut indexed to inflation — no family earning under $400,000 pays more",
+      "Reshore critical supply chains in semiconductors, pharmaceuticals, and steel through targeted domestic investment incentives",
+      "Cut 30% of federal regulations strangling Main Street businesses within the first 100 days in office",
+      "Funded apprenticeship programs in every state, connecting employers directly with trained workers",
+      "Zero capital-gains tax on investments held five or more years in domestic manufacturing",
+      "Expand the Earned Income Tax Credit for two-parent working families raising children",
+      "Renegotiate trade agreements that put American workers first, not multinational financial institutions",
     ],
   },
   {
-    icon: "🛡️",
     title: "National Security",
     summary:
-      "Rebuild a peerless military, secure the southern border, and restore deterrence on the world stage.",
+      "Rebuild a peerless military, secure the border, and restore deterrence so that no adversary ever doubts the cost of challenging America.",
     bullets: [
-      "Modernize the Navy, Air Force, and Space Force",
-      "Finish the southern border barrier within 24 months",
-      "Crush fentanyl trafficking through targeted enforcement",
-      "Restore credibility with allies and our adversaries alike",
+      "Expand to a 350-ship Navy and grow the Air Force's fifth-generation fighter fleet within four years",
+      "Complete the southern border barrier and implement a modernized, merit-based legal immigration system",
+      "Crush fentanyl trafficking through enforcement partnerships with Mexico and Central American governments",
+      "Restore NATO credibility and reaffirm Pacific security commitments with treaty allies",
+      "Increase defense R&D by 25%, prioritizing hypersonics, cyber operations, and space warfare capabilities",
+      "End open-ended nation-building missions abroad — refocus military power on direct American interests",
+      "Modernize the nuclear triad to maintain strategic deterrence for the next generation of Americans",
     ],
   },
   {
-    icon: "🏥",
     title: "Healthcare",
     summary:
-      "Bring market competition to healthcare while protecting Americans with pre-existing conditions.",
+      "Bring genuine market competition to healthcare, protect Americans with pre-existing conditions, and make prices transparent so patients can make real choices.",
     bullets: [
-      "Price transparency at every hospital and pharmacy",
-      "Expand HSAs and tax-free direct primary care",
-      "Cap insulin and EpiPen prices for working families",
-      "Veterans care — fixed, not bandaged",
+      "Mandate full price transparency at every hospital, pharmacy, and insurance provider — no exceptions",
+      "Triple HSA contribution limits and make accounts fully transferable across employers and life changes",
+      "Cap insulin at $35 per month and EpiPen prices at $50 for every American, not just select beneficiaries",
+      "Reform VA healthcare through private-sector partnerships and strict appointment accountability standards",
+      "Allow importation of FDA-equivalent prescription drugs from Canada, the UK, and Australia",
+      "Protect pre-existing condition coverage while repealing costly mandates that drive up premiums for healthy workers",
+      "Fund community health centers in rural hospital deserts where millions of Americans have no local care",
     ],
   },
   {
-    icon: "⚖️",
     title: "Rule of Law",
     summary:
-      "Back our police, appoint constitutionalist judges, and equal justice under law for every American.",
+      "Back our law enforcement, appoint constitutionalist judges, and guarantee equal justice under law — from the courthouse to the White House.",
     bullets: [
-      "Federal grant program to recruit & retain officers",
-      "Bipartisan judicial reforms targeting docket backlogs",
-      "End political prosecutions — from any party",
-      "Protect the Bill of Rights, full stop",
+      "Federal grant program to recruit, retain, and train law enforcement officers in high-crime communities",
+      "Reform federal judiciary scheduling to cut docket backlogs through senior-judge programs and streamlined procedures",
+      "Establish independent DOJ oversight to end politically weaponized prosecutions from either party",
+      "Protect every right in the Bill of Rights — including the Second Amendment — against executive overreach",
+      "Reform civil asset forfeiture so that property cannot be seized without a criminal conviction",
+      "Invest in mental health courts and drug diversion programs to address root causes driving recidivism",
+      "Restore qualified immunity protections for officers acting in good faith while mandating enhanced training standards",
     ],
   },
   {
-    icon: "🎓",
     title: "Education",
     summary:
-      "Return power to parents, expand school choice, and invest in skills that lead to good jobs.",
+      "Return power to parents, expand school choice, and invest in the skills and knowledge that lead to real jobs and civic participation.",
     bullets: [
-      "Universal school choice via portable per-pupil funding",
-      "Defund radical curriculum, invest in core literacy",
-      "Restore civics: every graduate passes the citizenship test",
-      "Modern vocational programs in every high school",
+      "Universal school choice through portable per-pupil funding — every child, regardless of zip code or income",
+      "Replace ideologically driven curriculum with rigorous standards in reading, mathematics, and American civics",
+      "Restore the U.S. citizenship test as a high school graduation requirement in all fifty states",
+      "Expand accredited vocational and technical education programs in every public high school in America",
+      "Cut K-12 administrative overhead by 20% and redirect those dollars directly into classrooms",
+      "Incentivize states to offer year-round schooling options that work for single-parent and dual-income families",
+      "Replace open-ended federal student loan expansion with income-share agreements and vocational pathway grants",
     ],
   },
   {
-    icon: "⚡",
     title: "Energy & Environment",
     summary:
-      "Achieve American energy dominance through an all-of-the-above approach — oil, gas, nuclear, and innovation.",
+      "Achieve full American energy dominance through an all-of-the-above approach — oil, gas, nuclear, and homegrown innovation — and stop depending on adversaries for the power that runs our lives.",
     bullets: [
-      "Approve next-gen nuclear & SMRs at scale",
-      "Open responsible drilling on federal lands",
-      "Modernize the grid — stop blackouts, stop blackmail",
-      "Innovation, not regulation, on emissions",
+      "Approve next-generation nuclear reactors and small modular reactors at commercial scale within four years",
+      "Open responsible drilling on federal lands with strict environmental monitoring and mandatory reclamation bonds",
+      "Modernize the national grid to eliminate rolling blackouts and end dependence on Chinese-manufactured components",
+      "Fund a National Energy Prize to reward private-sector breakthroughs in storage, fusion, and carbon capture",
+      "Withdraw from the Paris Climate Accord and negotiate direct bilateral agreements with the world's largest emitters",
+      "Achieve full North American energy independence by 2030 through expanded production and infrastructure buildout",
+      "Develop domestic rare earth mining capacity to eliminate dependence on Chinese supply chains for critical minerals",
     ],
   },
 ];
@@ -113,7 +125,6 @@ export default function PlatformPage() {
                 }}
               />
               <div>
-                <div style={{ fontSize: 44, marginBottom: 12 }}>{p.icon}</div>
                 <p style={{ color: i % 2 === 0 ? "#b22234" : "#0a2463", fontSize: 11, letterSpacing: 4, fontWeight: 700, margin: 0 }}>
                   PILLAR {String(i + 1).padStart(2, "0")}
                 </p>
